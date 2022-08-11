@@ -1,0 +1,37 @@
+{
+  "name": "backend_personal_budget",
+  "version": "1.0.0",
+  "description": "Backend for personal budget management made with nodejs and expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "mongodb",
+    "mongoose",
+    "typescript"
+  ],
+  "author": "Jonathan Max Saravia Moreira",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv": "16.0.1",
+    "eslint-plugin-typescript-sort-keys": "2.1.0",
+    "express": "4.18.1",
+    "log4js": "6.6.1",
+    "mongoose": "6.5.2"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/parser": "5.33.0",
+    "eslint": "8.21.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-promise": "6.0.0",
+    "ts-node-dev": "2.0.0"
+  }
+}
