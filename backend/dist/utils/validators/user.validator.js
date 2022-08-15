@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterUserInit = void 0;
 const Yup = __importStar(require("yup"));
 const onlyText = /^[A-Za-z]*$/;
-const RegisterUserSchema = Yup.object({
+const RegisterUserSchemaValidator = Yup.object({
     email: Yup.string()
         .typeError('Name must be an string of characters')
         .required('Email is required')
@@ -53,5 +53,5 @@ exports.RegisterUserInit = {
 //   console.log(err.name); // => 'ValidationError'
 //   console.log(err.errors); // => ["Name can only contains alphabet's letters", "Email is required", "Password is required"]
 // });
-exports.default = RegisterUserSchema;
+exports.default = RegisterUserSchemaValidator;
 //# sourceMappingURL=user.validator.js.map

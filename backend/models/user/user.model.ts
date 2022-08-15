@@ -1,12 +1,9 @@
 import prisma from '../../db/intance.db'
-import CustomError, { PrismaErr } from '../../utils/error/customError.utils'
+import CustomError from '../../utils/error/customError.utils'
 import STATUS from '../../utils/constants/httpStatus.utils'
+import { PrismaErr } from '../../ts/utils'
+import { CreateUser } from '../../ts/models'
 
-export interface CreateUser {
-  email: string,
-  name: string,
-  password: string
-}
 export const createUserModel = async (payload:CreateUser) => {
   try {
     if (prisma) {

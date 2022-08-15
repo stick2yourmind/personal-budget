@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const error_middleware_1 = __importDefault(require("../middlewares/error/error.middleware"));
-const notFound_middleware_1 = __importDefault(require("../middlewares/error/notFound.middleware"));
+const error_middleware_1 = __importDefault(require("../middlewares/errors/error.middleware"));
+const notFound_middleware_1 = __importDefault(require("../middlewares/errors/notFound.middleware"));
 const api_routes_1 = __importDefault(require("./api/api.routes"));
 const router = (0, express_1.Router)();
 // API routes

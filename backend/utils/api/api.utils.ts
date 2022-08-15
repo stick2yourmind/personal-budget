@@ -1,20 +1,4 @@
-import { ErrorDetails } from '../error/customError.utils'
-
-export interface ApiFailedResponseParams{
-  errorDetails?: ErrorDetails
-  errorMessage: string
-}
-export type ApiFailedResponseFn = (error:ApiFailedResponseParams, statusCode: number) =>
-  {details?:ErrorDetails, error:boolean, message:string, statusCode: number}
-
-// !data need to be modified
-
-export interface RegisterUserResponse{
-  email: string
-  name: string
-  password: string
-}
-export type LoginUserResponse = Pick<RegisterUserResponse, 'email' | 'name'>
+import { LoginUserResponse, ApiFailedResponseFn } from '../../ts/utils'
 
 export const apiSuccessResponse = (data:(LoginUserResponse), statusCode = 200) => {
   return {

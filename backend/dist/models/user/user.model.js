@@ -17,24 +17,23 @@ const createUserModel = async (payload) => {
                     password: payload.password
                 }
             });
-            console.log('🚀 ~ file: user.model.ts ~ line 17 ~ createUserModel ~ user', User);
             return User;
         }
         else
-            throw new customError_utils_1.default('Error at model while trying to create a user', httpStatus_utils_1.default.SERVER_ERROR, { modelErr: 'Prisma database instance is undefined' });
+            throw new customError_utils_1.default('Error at model while trying to create a user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
     }
     catch (err) {
         if (err instanceof customError_utils_1.default)
-            throw new customError_utils_1.default(err.message, err.code, err.details);
-        throw new customError_utils_1.default('Error at model while trying to create a user', httpStatus_utils_1.default.SERVER_ERROR, {
+            throw new customError_utils_1.default(err.message, err.details, err.statusCode);
+        const errorCode = err?.code === 'P2002' ? httpStatus_utils_1.default.CONFLICT : httpStatus_utils_1.default.SERVER_ERROR;
+        throw new customError_utils_1.default('Error while trying to create a user', {
             modelErr: {
                 clientVersion: err?.clientVersion,
                 code: err?.code,
-                errorCode: err?.errorCode,
                 message: err.message,
-                meta: JSON.stringify(err?.meta)
+                meta: err?.meta
             }
-        });
+        }, errorCode);
     }
 };
 exports.createUserModel = createUserModel;

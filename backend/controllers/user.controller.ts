@@ -1,7 +1,8 @@
-import { LoginUserResponse, apiSuccessResponse } from '../utils/api/api.utils'
+import { apiSuccessResponse } from '../utils/api/api.utils'
 import { NextFunction, Request, Response } from 'express'
 import STATUS from '../utils/constants/httpStatus.utils'
 import { createUserService } from '../services/user/user.services'
+import { LoginUserResponse } from '../ts/utils'
 
 export const registerUser = async (req:Request, res:Response, next:NextFunction) => {
   try {

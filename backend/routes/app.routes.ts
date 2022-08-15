@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import errorMiddleware from '../middlewares/error/error.middleware'
-import notFoundMiddleware from '../middlewares/error/notFound.middleware'
+import errorMiddleware from '../middlewares/errors/error.middleware'
+import notFoundMiddleware from '../middlewares/errors/notFound.middleware'
 import apiRoute from './api/api.routes'
 
 const router = Router()

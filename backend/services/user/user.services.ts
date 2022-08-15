@@ -1,13 +1,11 @@
 import { ValidationError } from 'yup'
 import STATUS from '../../utils/constants/httpStatus.utils'
-import CustomError, { ErrorDetails } from '../../utils/error/customError.utils'
+import CustomError from '../../utils/error/customError.utils'
 import RegValidator from '../../utils/validators/user.validator'
-import { createUserModel, CreateUser } from './../../models/user/user.model'
-
-export interface UserDataResponse{
-  email: string
-  name: string
-}
+import { createUserModel } from './../../models/user/user.model'
+import { ErrorDetails } from '../../ts/utils'
+import { UserDataResponse } from '../../ts/controllers'
+import { CreateUser } from '../../ts/models'
 
 export const createUserService = async ({ email, name, password }:CreateUser):Promise<UserDataResponse> => {
   try {

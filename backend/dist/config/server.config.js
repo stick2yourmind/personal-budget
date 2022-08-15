@@ -13,8 +13,8 @@ const SERVER_CFG = {
         process.env.ALLOWED_ORIGINS_TESTING_ALTER
     ],
     HOST: process.env.HOST,
-    PORT: Number(process.env.PORT),
-    MODE: process.env.MODE
+    MODE: process.env.MODE,
+    PORT: Number(process.env.PORT)
 };
 exports.default = SERVER_CFG;
 //# sourceMappingURL=server.config.js.map

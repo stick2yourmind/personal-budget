@@ -3,6 +3,7 @@ import { apiFailedResponse } from '../../utils/api/api.utils'
 import HTTP_STATUS from '../../utils/constants/httpStatus.utils'
 import { warnLogger } from '../../utils/logger/logger.utils'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const notFoundMiddleware = (req:Request, res: Response, next: NextFunction) => {
   const status = HTTP_STATUS.NOT_FOUND
   const message = `${req.method}: ${req.baseUrl}${req.path}: Resource not found :(`
