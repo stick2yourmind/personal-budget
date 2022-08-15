@@ -1,9 +1,11 @@
+import { ErrorDetails } from '../error/customError.utils'
+
 export interface ApiFailedResponseParams{
+  errorDetails?: ErrorDetails
   errorMessage: string
-  errorDetails?: string
 }
 export type ApiFailedResponseFn = (error:ApiFailedResponseParams, statusCode: number) =>
-  {error:boolean, message:string, details?:string, statusCode: number}
+  {details?:ErrorDetails, error:boolean, message:string, statusCode: number}
 
 // !data need to be modified
 
@@ -12,9 +14,9 @@ export interface RegisterUserResponse{
   name: string
   password: string
 }
-export type LoginUserResponse = Pick<RegisterUserResponse, 'email' | 'password'>
+export type LoginUserResponse = Pick<RegisterUserResponse, 'email' | 'name'>
 
-export const apiSuccessResponse = (data:(RegisterUserResponse | LoginUserResponse), statusCode = 200) => {
+export const apiSuccessResponse = (data:(LoginUserResponse), statusCode = 200) => {
   return {
     data,
     error: false,
@@ -23,17 +25,17 @@ export const apiSuccessResponse = (data:(RegisterUserResponse | LoginUserRespons
 }
 
 export const apiFailedResponse:ApiFailedResponseFn = (error, statusCode = 500) => {
-  if (!error.errorDetails) {
+  if (!error.errorDetails)
     return {
       error: true,
       message: error.errorMessage,
       statusCode
     }
-  }
+
   return {
+    details: error.errorDetails,
     error: true,
     message: error.errorMessage,
-    details: error.errorDetails,
     statusCode
   }
 }

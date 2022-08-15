@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { apiFailedResponse } from '../utils/api/api.utils'
-import HTTP_STATUS from '../utils/constants/httpStatus.utils'
-import { warnLogger } from '../utils/logger/logger.utils'
+import { apiFailedResponse } from '../../utils/api/api.utils'
+import HTTP_STATUS from '../../utils/constants/httpStatus.utils'
+import { warnLogger } from '../../utils/logger/logger.utils'
 
 const notFoundMiddleware = (req:Request, res: Response, next: NextFunction) => {
   const status = HTTP_STATUS.NOT_FOUND

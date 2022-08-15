@@ -1,0 +1,32 @@
+{
+  "name": "@stick2yourmind/personal-budget",
+  "version": "1.0.0",
+  "description": "MERN Stack app for personal budget management",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stick2yourmind/personal-budget.git"
+  },
+  "keywords": [
+    "MERN",
+    "expressjs",
+    "nodejs",
+    "react",
+    "mongodb",
+    "mongoose",
+    "typescript",
+    "eslint",
+    "cors",
+    "log4js",
+    "dotenv"
+  ],
+  "author": "Jonathan Max Saravia Moreira <saravia.jonathan.m@gmail.com> (https://github.com/stick2yourmind)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stick2yourmind/personal-budget/issues"
+  },
+  "homepage": "https://github.com/stick2yourmind/personal-budget#readme"
+}
