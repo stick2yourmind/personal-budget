@@ -1,7 +1,7 @@
 import { ValidationError } from 'yup'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import CustomError from '../../utils/error/customError.utils'
-import { createUserModel, loginUserModel } from './../../models/user/user.model'
+import { createUserModel, getUserByEmailModel, updateUserByEmailModel } from './../../models/user/user.model'
 import { ErrorDetails } from '../../ts/utils'
 import { LoginUserService, CreateUserService } from '../../ts/services'
 import {
@@ -38,11 +38,11 @@ export const createUserService:CreateUserService = async ({ email, name, passwor
 export const loginUserService:LoginUserService = async ({ email, password }) => {
   try {
     await LoginValidator.validate({ email, password }, { abortEarly: false })
-    const User = await loginUserModel({ email })
+    const User = await getUserByEmailModel({ email })
     const isValidLogin = isValidPassword(password, User?.password)
     if (User !== null && isValidLogin) {
       const { accessToken, refreshToken } = jwtLoginSign({ email })
-      // await UserDao.updateByEmail(email, { refreshToken })
+      await updateUserByEmailModel({ email, refreshToken })
       return {
         accessToken,
         email: User.email,
