@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import createUserMiddleware from '../middlewares/users/register.middeware'
+import { PrismaClientType } from '../ts/db'
 
-export type PrismaClientType = InstanceType< typeof PrismaClient> | undefined
 type SetInstance = () => InstanceType< typeof PrismaClient> | undefined
 
 let dbIsInstanced = false
