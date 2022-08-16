@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt'
 import CODIFICATION_CFG from '../../config/codification.config'
 import CustomError from '../../utils/error/customError.utils'
 import STATUS from '../../utils/constants/httpStatus.utils'
-import { PrismaClientType } from '../../db/intance.db'
+import { PrismaClientType } from '../../ts/db'
+import { Middleware } from '../../ts/middleware'
 
 /**
  *Creates a salt to be used for encryptation
@@ -33,7 +34,7 @@ const hashPassword = async (password:string) => await bcrypt.hash(password, awai
  * @param {PrismaClientType} prisma
  */
 const createUserMiddleware = (prisma: PrismaClientType) => {
-  prisma?.$use(async (params, next) => {
+  const prismaCreateMiddleware:Middleware = async (params, next) => {
     try {
       // Check incoming model
       if (params.model === 'User')
@@ -47,7 +48,8 @@ const createUserMiddleware = (prisma: PrismaClientType) => {
       // eslint-disable-next-line no-unsafe-finally
       return next(params)
     }
-  })
+  }
+  prisma?.$use(prismaCreateMiddleware)
 }
 
 export default createUserMiddleware

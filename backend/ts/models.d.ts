@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 /* -------------------------------------------------------------------------- */
 /*                                MODEL'S TYPES                               */
 /* -------------------------------------------------------------------------- */
@@ -8,16 +9,21 @@ export type NameType = string
 export type refreshTokenType = string
 
 export interface CreateUser {
-  email: EmailType
-  name: NameType
-  password: PasswordType
+  email: User['email']
+  name: User['name']
+  password: User['password']
 }
 
 export interface GetUser {
-  email: EmailType
+  email: User['email']
 }
 
 export interface UpdateUserByEmailLogin {
-  email: EmailType
-  refreshToken: refreshTokenType
+  email: User['email']
+  refreshToken: User['refreshToken']
+}
+
+export interface ModelName {
+  Cashflow: 'Cashflow'
+  User: 'User'
 }

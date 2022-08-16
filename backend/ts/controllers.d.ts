@@ -1,8 +1,12 @@
+import { EmailType, NameType } from './models'
+/* -------------------------------------------------------------------------- */
+/*                              CONTROLLER'S TYPE                             */
+/* -------------------------------------------------------------------------- */
 export interface UserDataResponse{
-  email: string
-  name: string
+  email: EmailType
+  name: NameType
 }
 export interface UserDataNullResponse{
-  email: string | undefined
-  name: string | undefined
+  email: EmailType | undefined
+  name: NameType | undefined
 }
