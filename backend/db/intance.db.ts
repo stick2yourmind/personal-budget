@@ -18,4 +18,4 @@ const setInstance:SetInstance = () => {
 
 setInstance()
 
-export default setInstance()
+export default dbInstance
