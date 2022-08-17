@@ -10,7 +10,7 @@ const httpStatus_utils_1 = __importDefault(require("../../utils/constants/httpSt
 /**
  *Creates a salt to be used for encryptation
  *
- * @return {string} salt - Generated salt
+ * @return {Promise<string>} salt - Generated salt
  */
 const salt = async () => {
     if (codification_config_1.default.BCRYPT_SALT)
@@ -22,7 +22,7 @@ const salt = async () => {
  *Encrypt password
  *
  * @param {string} password
- * @retuen {string} hash - Encrypted password
+ * @return {Promise<string>} hash - Encrypted password
  */
 const hashPassword = async (password) => await bcrypt_1.default.hash(password, await salt());
 /**
@@ -31,7 +31,7 @@ const hashPassword = async (password) => await bcrypt_1.default.hash(password, a
  * @param {PrismaClientType} prisma
  */
 const createUserMiddleware = (prisma) => {
-    prisma?.$use(async (params, next) => {
+    const prismaCreateMiddleware = async (params, next) => {
         try {
             // Check incoming model
             if (params.model === 'User')
@@ -47,7 +47,8 @@ const createUserMiddleware = (prisma) => {
             // eslint-disable-next-line no-unsafe-finally
             return next(params);
         }
-    });
+    };
+    prisma?.$use(prismaCreateMiddleware);
 };
 exports.default = createUserMiddleware;
 //# sourceMappingURL=register.middeware.js.map

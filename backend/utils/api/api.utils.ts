@@ -1,6 +1,7 @@
+import { CashflowDataResponse } from './../../ts/controllers.d'
 import { LoginUserResponse, ApiFailedResponseFn } from '../../ts/utils'
 
-export const apiSuccessResponse = (data:(LoginUserResponse), statusCode = 200) => {
+export const apiSuccessResponse = (data:(LoginUserResponse | CashflowDataResponse), statusCode = 200) => {
   return {
     data,
     error: false,

@@ -1,7 +1,7 @@
 import { ValidationError } from 'yup'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import CustomError from '../../utils/error/customError.utils'
-import { createUserModel, getUserByEmailModel, updateUserByEmailModel } from './../../models/user/user.model'
+import { createUserModel, getUserByEmailModel, updateUserByEmailModel } from '../../models/user/user.model'
 import { ErrorDetails } from '../../ts/utils'
 import { LoginUserService, CreateUserService } from '../../ts/services'
 import {
@@ -41,13 +41,14 @@ export const loginUserService:LoginUserService = async ({ email, password }) => 
     const User = await getUserByEmailModel({ email })
     const isValidLogin = isValidPassword(password, User?.password)
     if (User !== null && isValidLogin) {
-      const { accessToken, refreshToken } = jwtLoginSign({ email })
+      const { accessToken, refreshToken } = jwtLoginSign({ userId: User.id })
       await updateUserByEmailModel({ email, refreshToken })
       return {
         accessToken,
         email: User.email,
         name: User.name,
-        refreshToken
+        refreshToken,
+        userId: User.id
       }
     } else throw new CustomError(
       'Error while trying to login an user: email or password are invalid',

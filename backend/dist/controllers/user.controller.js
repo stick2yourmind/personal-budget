@@ -22,7 +22,7 @@ exports.registerUser = registerUser;
 const loginUser = async (req, res, next) => {
     try {
         const { password, email } = req.body;
-        const loginMsg = { email, name: password };
+        const loginMsg = await (0, user_services_1.loginUserService)({ email, password });
         const response = (0, api_utils_1.apiSuccessResponse)(loginMsg, httpStatus_utils_1.default.OK);
         return res.status(httpStatus_utils_1.default.OK).json(response);
     }

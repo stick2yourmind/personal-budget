@@ -8,9 +8,9 @@ import { Middleware } from '../../ts/middleware'
 /**
  *Creates a salt to be used for encryptation
  *
- * @return {string} salt - Generated salt
+ * @return {Promise<string>} salt - Generated salt
  */
-const salt = async () => {
+const salt = async (): Promise<string> => {
   if (CODIFICATION_CFG.BCRYPT_SALT)
     return await bcrypt.genSalt(Number(CODIFICATION_CFG.BCRYPT_SALT))
   else throw new CustomError(
@@ -24,9 +24,9 @@ const salt = async () => {
  *Encrypt password
  *
  * @param {string} password
- * @retuen {string} hash - Encrypted password
+ * @return {Promise<string>} hash - Encrypted password
  */
-const hashPassword = async (password:string) => await bcrypt.hash(password, await salt())
+const hashPassword = async (password:string): Promise<string> => await bcrypt.hash(password, await salt())
 
 /**
  *Encrypts password in order to save a secure password at database

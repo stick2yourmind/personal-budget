@@ -16,5 +16,5 @@ const setInstance = () => {
     return dbInstance;
 };
 setInstance();
-exports.default = setInstance();
+exports.default = dbInstance;
 //# sourceMappingURL=intance.db.js.map

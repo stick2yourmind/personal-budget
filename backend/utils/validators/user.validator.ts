@@ -1,8 +1,8 @@
-import { EmailType } from './../../ts/models.d'
 import * as Yup from 'yup'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import JWT_CFG from '../../config/jwt.config'
+import { UserIdType } from './../../ts/models.d'
 
 const onlyText = /^[A-Za-z]*$/
 
@@ -65,15 +65,15 @@ export const isValidPassword = (password:string, encriptedPassword:string | unde
   else return false
 }
 
-export const jwtLoginSign = ({ email }:{email:EmailType}) => {
+export const jwtLoginSign = ({ userId }:{userId: UserIdType}) => {
   if (typeof JWT_CFG.ACCESS_TOKEN_SECRET === 'string' && typeof JWT_CFG.REFRESH_TOKEN_SECRET === 'string') {
     const accessToken = jwt.sign(
-      { emailUser: email },
+      { id: userId },
       JWT_CFG.ACCESS_TOKEN_SECRET,
       { expiresIn: JWT_CFG.EXPIRES_ACCESS_TOKEN }
     )
     const refreshToken = jwt.sign(
-      { emailUser: email },
+      { id: userId },
       JWT_CFG.REFRESH_TOKEN_SECRET,
       { expiresIn: JWT_CFG.EXPIRES_REFRESH_TOKEN }
     )
