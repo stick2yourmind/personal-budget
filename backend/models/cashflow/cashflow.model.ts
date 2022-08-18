@@ -124,12 +124,12 @@ export const updateCashflowModel = async (payload:UpdateCashflow) => {
   }
 }
 
-export const deleteCashflowModel = async (payload:DeleteCashflow) => {
+export const delCashflowModel = async (payload:DeleteCashflow) => {
   try {
     if (prisma) {
-      const Cashflow = await prisma.cashflow.delete({
+      const Cashflow = await prisma.cashflow.deleteMany({
         where: {
-          id: payload.id
+          AND: [{ userId: { equals: payload.userId } }, { id: { equals: payload.id } }]
         }
       })
       return Cashflow

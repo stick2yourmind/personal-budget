@@ -33,3 +33,11 @@ export const getCashflowValidator = Yup.object({
   offset: Yup.string()
     .matches(onlyNumbers, 'id must be a positive number')
 })
+/* -------------------------------------------------------------------------- */
+/*                      DELETE CASHFLOW RECORD FROM BY ID                     */
+/* -------------------------------------------------------------------------- */
+export const delCashflowValidator = Yup.object({
+  id: Yup.string()
+    .matches(onlyNumbers, 'id must be a positive number')
+    .required('id is required')
+})

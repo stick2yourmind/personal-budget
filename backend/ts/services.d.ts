@@ -24,5 +24,9 @@ export interface GetCashflowReq extends Pick<Cashflow, 'accessToken'>{
   id?: CashflowIdType,
   offset?: OffsetType
 }
+export interface DelCashflowReq extends Pick<Cashflow, 'accessToken'>{
+  id?: CashflowIdType
+}
 
 export type GetCashflowService = (params:GetCashflowReq) => Promise<CashflowDataResponseRelated>
+export type DelCashflowService = (params:DelCashflowReq) => Promise<CashflowDataResponseRelated>
