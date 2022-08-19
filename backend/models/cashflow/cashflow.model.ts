@@ -88,17 +88,13 @@ export const getCashflowModel = async (payload:GetCashflow) => {
   }
 }
 
-export const updateCashflowModel = async (payload:UpdateCashflow) => {
+export const updCashflowModel = async (payload:UpdateCashflow) => {
   try {
     if (prisma) {
-      const Cashflow = await prisma.cashflow.update({
-        data: {
-          amount: payload.amount,
-          category: payload.category,
-          details: payload.details
-        },
+      const Cashflow = await prisma.cashflow.updateMany({
+        data: payload.data,
         where: {
-          id: payload.id
+          AND: [{ userId: { equals: payload.userId } }, { id: { equals: payload.id } }]
         }
       })
       return Cashflow

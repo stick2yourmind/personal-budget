@@ -5,6 +5,11 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 // Route to create a cashflow record
 router.post('/', cashflow_controller_1.createCashflowCtrlr);
+// Route to get a cashflow by its id
 router.get('/:id', cashflow_controller_1.getCashflowCtrlr);
+// Route to delete a cashflow by its id
+router.delete('/:id', cashflow_controller_1.deleteCashflowCtrlr);
+// Route to update a cashflow by its id
+router.put('/:id', cashflow_controller_1.updateCashflowCtrlr);
 exports.default = router;
 //# sourceMappingURL=cashflow.routes.js.map

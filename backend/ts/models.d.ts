@@ -46,7 +46,15 @@ export interface GetCashflow extends Pick<Cashflow, 'id'>{
   offset?: number
   userId: UserIdType
 }
-export type UpdateCashflow = Pick<Cashflow, 'id' | 'amount' | 'category' | 'details'>
+export interface UpdateCashflow {
+  data: {
+    amount?: AmountType
+    category?: CategoryType,
+    details?: DetailsType
+  }
+  id: CashflowIdType
+  userId: UserIdType
+}
 
 export type DeleteCashflow = Pick<Cashflow, 'id' | 'userId'>
 export type CashflowRelated = Cashflow[]

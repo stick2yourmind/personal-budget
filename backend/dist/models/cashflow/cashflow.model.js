@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCashflowModel = exports.updateCashflowModel = exports.getCashflowModel = exports.createCashflowModel = void 0;
+exports.delCashflowModel = exports.updCashflowModel = exports.getCashflowModel = exports.createCashflowModel = void 0;
 const intance_db_1 = __importDefault(require("../../db/intance.db"));
 const customError_utils_1 = __importDefault(require("../../utils/error/customError.utils"));
 const httpStatus_utils_1 = __importDefault(require("../../utils/constants/httpStatus.utils"));
@@ -85,17 +85,13 @@ const getCashflowModel = async (payload) => {
     }
 };
 exports.getCashflowModel = getCashflowModel;
-const updateCashflowModel = async (payload) => {
+const updCashflowModel = async (payload) => {
     try {
         if (intance_db_1.default) {
-            const Cashflow = await intance_db_1.default.cashflow.update({
-                data: {
-                    amount: payload.amount,
-                    category: payload.category,
-                    details: payload.details
-                },
+            const Cashflow = await intance_db_1.default.cashflow.updateMany({
+                data: payload.data,
                 where: {
-                    id: payload.id
+                    AND: [{ userId: { equals: payload.userId } }, { id: { equals: payload.id } }]
                 }
             });
             return Cashflow;
@@ -117,13 +113,13 @@ const updateCashflowModel = async (payload) => {
         }, errorCode);
     }
 };
-exports.updateCashflowModel = updateCashflowModel;
-const deleteCashflowModel = async (payload) => {
+exports.updCashflowModel = updCashflowModel;
+const delCashflowModel = async (payload) => {
     try {
         if (intance_db_1.default) {
-            const Cashflow = await intance_db_1.default.cashflow.delete({
+            const Cashflow = await intance_db_1.default.cashflow.deleteMany({
                 where: {
-                    id: payload.id
+                    AND: [{ userId: { equals: payload.userId } }, { id: { equals: payload.id } }]
                 }
             });
             return Cashflow;
@@ -145,5 +141,5 @@ const deleteCashflowModel = async (payload) => {
         }, errorCode);
     }
 };
-exports.deleteCashflowModel = deleteCashflowModel;
+exports.delCashflowModel = delCashflowModel;
 //# sourceMappingURL=cashflow.model.js.map

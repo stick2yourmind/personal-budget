@@ -1,6 +1,6 @@
 import {
   createCashflowCtrlr, getCashflowCtrlr,
-  deleteCashflowCtrlr
+  deleteCashflowCtrlr, updateCashflowCtrlr
 } from '../../../controllers/cashflow.controller'
 import { Router } from 'express'
 
@@ -14,5 +14,8 @@ router.get('/:id', getCashflowCtrlr)
 
 // Route to delete a cashflow by its id
 router.delete('/:id', deleteCashflowCtrlr)
+
+// Route to update a cashflow by its id
+router.put('/:id', updateCashflowCtrlr)
 
 export default router
