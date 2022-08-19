@@ -8,6 +8,7 @@ const SERVER_CFG = {
     process.env.ALLOWED_ORIGINS_TESTING,
     process.env.ALLOWED_ORIGINS_TESTING_ALTER
   ],
+  DB_URL: process.env.DATABASE_URL,
   HOST: process.env.HOST,
   MODE: process.env.MODE,
   PORT: Number(process.env.PORT)

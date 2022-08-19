@@ -7,3 +7,7 @@ npm run-script backend-dev-db-migrate
 npm run-script backend-dev
 # 3. To see database registers (optional)
 npm run-script backend-dev-db-show
+
+
+Or you can run this whit your cmd terminal:
+npm run-script backend-dev-db-migrate && npm run-script backend-dev
