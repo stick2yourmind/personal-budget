@@ -1,3 +1,4 @@
+import { AccessTokenType, RefreshTokenType, UserIdType } from './models.d'
 import { User } from '@prisma/client'
 import { EmailType, NameType, CreateCashflow } from './models'
 import { ParsedQs } from 'qs'
@@ -7,8 +8,11 @@ import { ParsedQs } from 'qs'
 
 /* ---------------------------------- USER ---------------------------------- */
 export interface UserDataResponse{
+  accessToken?: AccessTokenType
   email: EmailType
   name: NameType
+  refreshToken?: RefreshTokenType
+  userId?: UserIdType
 }
 export interface UserDataNullResponse{
   email: EmailType | undefined
