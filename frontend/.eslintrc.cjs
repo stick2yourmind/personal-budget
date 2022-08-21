@@ -5,7 +5,11 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard'
+    'standard',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
