@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jwtLoginSign = exports.isValidPassword = exports.LoginValidator = exports.RegisterUserInit = exports.RegisterValidator = void 0;
+exports.refreshTokenValidator = exports.jwtLoginSign = exports.signRefreshToken = exports.signAccessToken = exports.isValidPassword = exports.LoginValidator = exports.RegisterUserInit = exports.RegisterValidator = void 0;
 const Yup = __importStar(require("yup"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -83,14 +83,41 @@ const isValidPassword = (password, encriptedPassword) => {
         return false;
 };
 exports.isValidPassword = isValidPassword;
+const signAccessToken = (data) => {
+    if (jwt_config_1.default.ACCESS_TOKEN_SECRET) {
+        const accessToken = jsonwebtoken_1.default.sign(data, jwt_config_1.default.ACCESS_TOKEN_SECRET, { expiresIn: jwt_config_1.default.EXPIRES_ACCESS_TOKEN });
+        return accessToken;
+    }
+    else
+        throw new Error('JWT access token secret key must be provided');
+};
+exports.signAccessToken = signAccessToken;
+const signRefreshToken = (data) => {
+    if (jwt_config_1.default.REFRESH_TOKEN_SECRET) {
+        const accessToken = jsonwebtoken_1.default.sign(data, jwt_config_1.default.REFRESH_TOKEN_SECRET, { expiresIn: jwt_config_1.default.EXPIRES_REFRESH_TOKEN });
+        return accessToken;
+    }
+    else
+        throw new Error('JWT access token secret key must be provided');
+};
+exports.signRefreshToken = signRefreshToken;
 const jwtLoginSign = ({ userId }) => {
     if (typeof jwt_config_1.default.ACCESS_TOKEN_SECRET === 'string' && typeof jwt_config_1.default.REFRESH_TOKEN_SECRET === 'string') {
-        const accessToken = jsonwebtoken_1.default.sign({ id: userId }, jwt_config_1.default.ACCESS_TOKEN_SECRET, { expiresIn: jwt_config_1.default.EXPIRES_ACCESS_TOKEN });
-        const refreshToken = jsonwebtoken_1.default.sign({ id: userId }, jwt_config_1.default.REFRESH_TOKEN_SECRET, { expiresIn: jwt_config_1.default.EXPIRES_REFRESH_TOKEN });
+        const accessToken = (0, exports.signAccessToken)({ id: userId });
+        const refreshToken = (0, exports.signRefreshToken)({ id: userId });
         return { accessToken, refreshToken };
     }
     else
         throw new Error('JWT secret keys must be provided');
 };
 exports.jwtLoginSign = jwtLoginSign;
+const refreshTokenValidator = async ({ refreshToken }) => {
+    if (jwt_config_1.default.REFRESH_TOKEN_SECRET) {
+        const decoded = await jsonwebtoken_1.default.verify(refreshToken || '', jwt_config_1.default.REFRESH_TOKEN_SECRET);
+        return decoded;
+    }
+    else
+        throw new Error('JWT refresh token secret key must be provided');
+};
+exports.refreshTokenValidator = refreshTokenValidator;
 //# sourceMappingURL=user.validator.js.map

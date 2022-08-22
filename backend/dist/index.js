@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const server_config_1 = __importDefault(require("./config/server.config"));
 const app_routes_1 = __importDefault(require("./routes/app.routes"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
 // App middlewares
+// Middleware for binding req.headers.cookie to req.cookies
+app.use((0, cookie_parser_1.default)());
 // Middleware to handle JSON
 app.use(express_1.default.json());
 // Middleware to handle urlencoded form data

@@ -19,7 +19,9 @@ export interface CreateUser {
 export interface GetUser {
   email: EmailType
 }
-
+export interface GetUserById {
+  id: User['id']
+}
 export interface UpdateUserByEmailLogin {
   email: EmailType
   refreshToken: refreshTokenType

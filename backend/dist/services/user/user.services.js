@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUserService = exports.createUserService = void 0;
+exports.refreshAuthService = exports.loginUserService = exports.createUserService = void 0;
 const yup_1 = require("yup");
 const httpStatus_utils_1 = __importDefault(require("../../utils/constants/httpStatus.utils"));
 const customError_utils_1 = __importDefault(require("../../utils/error/customError.utils"));
@@ -45,6 +45,7 @@ const loginUserService = async ({ email, password }) => {
                 email: User.email,
                 name: User.name,
                 refreshToken,
+                role: User.role,
                 userId: User.id
             };
         }
@@ -65,4 +66,36 @@ const loginUserService = async ({ email, password }) => {
     }
 };
 exports.loginUserService = loginUserService;
+const refreshAuthService = async ({ refreshToken }) => {
+    try {
+        const decodedData = await (0, user_validator_1.refreshTokenValidator)({ refreshToken });
+        const User = await (0, user_model_1.getUserById)({ id: decodedData.id });
+        if (User !== null) {
+            const accessToken = (0, user_validator_1.signAccessToken)({ id: User.id });
+            return {
+                accessToken,
+                email: User.email,
+                name: User.name,
+                refreshToken,
+                role: User.role,
+                userId: User.id
+            };
+        }
+        else
+            throw new customError_utils_1.default('Error while trying to refresh the login to an user: token is invalid', { serviceErr: 'Error while trying to refresh the login to an user: user can not be found' }, httpStatus_utils_1.default.UNAUTHORIZED);
+    }
+    catch (err) {
+        if (err instanceof customError_utils_1.default) {
+            const details = {
+                modelErr: err?.details?.modelErr,
+                serviceErr: 'Error at service while trying to refresh the login to an user'
+            };
+            throw new customError_utils_1.default(err.message, details, err.statusCode);
+        }
+        if (err instanceof yup_1.ValidationError)
+            throw new customError_utils_1.default('Error while trying to refresh the login to an user: ' + err.errors, { serviceErr: JSON.stringify(err.errors) }, httpStatus_utils_1.default.UNPROCESSABLE_ENTITY);
+        throw new customError_utils_1.default('Error while trying to refresh the login to an user', { detailMsg: err.message }, httpStatus_utils_1.default.SERVER_ERROR);
+    }
+};
+exports.refreshAuthService = refreshAuthService;
 //# sourceMappingURL=user.services.js.map

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserByEmailModel = exports.getUserByEmailModel = exports.createUserModel = void 0;
+exports.getUserById = exports.updateUserByEmailModel = exports.getUserByEmailModel = exports.createUserModel = void 0;
 const intance_db_1 = __importDefault(require("../../db/intance.db"));
 const customError_utils_1 = __importDefault(require("../../utils/error/customError.utils"));
 const httpStatus_utils_1 = __importDefault(require("../../utils/constants/httpStatus.utils"));
@@ -48,13 +48,13 @@ const getUserByEmailModel = async (payload) => {
             return User;
         }
         else
-            throw new customError_utils_1.default('Error at model while trying to login an user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
+            throw new customError_utils_1.default('Error at model while trying to get an user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
     }
     catch (err) {
         if (err instanceof customError_utils_1.default)
             throw new customError_utils_1.default(err.message, err.details, err.statusCode);
         const errorCode = err?.code === 'P2002' ? httpStatus_utils_1.default.CONFLICT : httpStatus_utils_1.default.SERVER_ERROR;
-        throw new customError_utils_1.default('Error while trying to login an user', {
+        throw new customError_utils_1.default('Error while trying to get an user', {
             modelErr: {
                 clientVersion: err?.clientVersion,
                 code: err?.code,
@@ -79,13 +79,13 @@ const updateUserByEmailModel = async (payload) => {
             return User;
         }
         else
-            throw new customError_utils_1.default('Error at model while trying to login an user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
+            throw new customError_utils_1.default('Error at model while trying to update an user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
     }
     catch (err) {
         if (err instanceof customError_utils_1.default)
             throw new customError_utils_1.default(err.message, err.details, err.statusCode);
         const errorCode = err?.code === 'P2002' ? httpStatus_utils_1.default.CONFLICT : httpStatus_utils_1.default.SERVER_ERROR;
-        throw new customError_utils_1.default('Error while trying to login an user', {
+        throw new customError_utils_1.default('Error while trying to update an user', {
             modelErr: {
                 clientVersion: err?.clientVersion,
                 code: err?.code,
@@ -96,4 +96,32 @@ const updateUserByEmailModel = async (payload) => {
     }
 };
 exports.updateUserByEmailModel = updateUserByEmailModel;
+const getUserById = async (payload) => {
+    try {
+        if (intance_db_1.default) {
+            const User = await intance_db_1.default.user.findUnique({
+                where: {
+                    id: payload.id
+                }
+            });
+            return User;
+        }
+        else
+            throw new customError_utils_1.default('Error at model while trying to get an user', { modelErr: 'Prisma database instance is undefined' }, httpStatus_utils_1.default.SERVER_ERROR);
+    }
+    catch (err) {
+        if (err instanceof customError_utils_1.default)
+            throw new customError_utils_1.default(err.message, err.details, err.statusCode);
+        const errorCode = err?.code === 'P2002' ? httpStatus_utils_1.default.CONFLICT : httpStatus_utils_1.default.SERVER_ERROR;
+        throw new customError_utils_1.default('Error while trying to get an user', {
+            modelErr: {
+                clientVersion: err?.clientVersion,
+                code: err?.code,
+                message: err.message,
+                meta: err?.meta
+            }
+        }, errorCode);
+    }
+};
+exports.getUserById = getUserById;
 //# sourceMappingURL=user.model.js.map

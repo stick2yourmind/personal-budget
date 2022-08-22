@@ -1,9 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-enum Role {
-  USER
-  ADMIN
-}
 
 generator client {
   provider = "prisma-client-js"
@@ -34,6 +30,6 @@ model User {
   password      String
   updatedAt     DateTime @updatedAt
   refreshToken  String?
-  role          Role @default(USER)
+  role          Int @default(444)
   Cashflows     Cashflow[]
 }

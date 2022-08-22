@@ -1,7 +1,7 @@
 import { apiSuccessResponse } from '../utils/api/api.utils'
 import { NextFunction, Request, Response } from 'express'
 import STATUS from '../utils/constants/httpStatus.utils'
-import { createUserService, loginUserService } from '../services/user/user.services'
+import { createUserService, loginUserService, refreshAuthService } from '../services/user/user.services'
 import JWT_CFG from '../config/jwt.config'
 import SERVER_CFG from '../config/server.config'
 
@@ -36,6 +36,17 @@ export const loginUser = async (req:Request, res:Response, next:NextFunction) =>
         })
 
     const response = apiSuccessResponse(data, STATUS.OK)
+    return res.status(STATUS.OK).json(response)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const refreshAuth = async (req:Request, res:Response, next:NextFunction) => {
+  try {
+    const refreshTokenCookie = req?.cookies.refreshToken
+    const refreshAuthMsg = await refreshAuthService({ refreshToken: refreshTokenCookie })
+    const response = apiSuccessResponse(refreshAuthMsg, STATUS.OK)
     return res.status(STATUS.OK).json(response)
   } catch (error) {
     next(error)

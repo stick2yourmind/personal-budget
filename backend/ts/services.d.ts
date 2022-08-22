@@ -1,3 +1,4 @@
+import { RefreshTokenType } from './models.d'
 import { Cashflow } from '@prisma/client'
 import { UserDataResponse, CashflowDataResponse, OffsetType } from '../ts/controllers'
 import { CreateUser, GetUser, PasswordType, CreateCashflow } from '../ts/models'
@@ -10,10 +11,15 @@ import { CreateUser, GetUser, PasswordType, CreateCashflow } from '../ts/models'
 export interface LoginUserS extends GetUser{
   password: PasswordType
 }
+export interface RefreshUserS {
+  refreshToken: RefreshTokenType
+}
 
 export type CreateUserS = CreateUser
 
 export type LoginUserService = (params:LoginUserS) => Promise<UserDataResponse>
+
+export type RefreshAuthService = (params:RefreshUserS) => Promise<UserDataResponse>
 
 export type CreateUserService = (params:CreateUser) => Promise<UserDataResponse>
 

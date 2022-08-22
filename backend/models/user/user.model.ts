@@ -2,7 +2,7 @@ import prisma from '../../db/intance.db'
 import CustomError from '../../utils/error/customError.utils'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import { PrismaErr } from '../../ts/utils'
-import { CreateUser, GetUser, UpdateUserByEmailLogin } from '../../ts/models'
+import { CreateUser, GetUser, GetUserById, UpdateUserByEmailLogin } from '../../ts/models'
 
 export const createUserModel = async (payload:CreateUser) => {
   try {
@@ -48,14 +48,14 @@ export const getUserByEmailModel = async (payload:GetUser) => {
       return User
     } else
       throw new CustomError(
-        'Error at model while trying to login an user',
+        'Error at model while trying to get an user',
         { modelErr: 'Prisma database instance is undefined' },
         STATUS.SERVER_ERROR)
   } catch (err) {
     if (err instanceof CustomError)
       throw new CustomError(err.message, err.details, err.statusCode)
     const errorCode = (err as PrismaErr)?.code === 'P2002' ? STATUS.CONFLICT : STATUS.SERVER_ERROR
-    throw new CustomError('Error while trying to login an user',
+    throw new CustomError('Error while trying to get an user',
       {
         modelErr: {
           clientVersion: (err as PrismaErr)?.clientVersion,
@@ -82,14 +82,45 @@ export const updateUserByEmailModel = async (payload:UpdateUserByEmailLogin) => 
       return User
     } else
       throw new CustomError(
-        'Error at model while trying to login an user',
+        'Error at model while trying to update an user',
         { modelErr: 'Prisma database instance is undefined' },
         STATUS.SERVER_ERROR)
   } catch (err) {
     if (err instanceof CustomError)
       throw new CustomError(err.message, err.details, err.statusCode)
     const errorCode = (err as PrismaErr)?.code === 'P2002' ? STATUS.CONFLICT : STATUS.SERVER_ERROR
-    throw new CustomError('Error while trying to login an user',
+    throw new CustomError('Error while trying to update an user',
+      {
+        modelErr: {
+          clientVersion: (err as PrismaErr)?.clientVersion,
+          code: (err as PrismaErr)?.code,
+          message: (err as PrismaErr).message,
+          meta: (err as PrismaErr)?.meta
+        }
+      },
+      errorCode)
+  }
+}
+
+export const getUserById = async (payload:GetUserById) => {
+  try {
+    if (prisma) {
+      const User = await prisma.user.findUnique({
+        where: {
+          id: payload.id
+        }
+      })
+      return User
+    } else
+      throw new CustomError(
+        'Error at model while trying to get an user',
+        { modelErr: 'Prisma database instance is undefined' },
+        STATUS.SERVER_ERROR)
+  } catch (err) {
+    if (err instanceof CustomError)
+      throw new CustomError(err.message, err.details, err.statusCode)
+    const errorCode = (err as PrismaErr)?.code === 'P2002' ? STATUS.CONFLICT : STATUS.SERVER_ERROR
+    throw new CustomError('Error while trying to get an user',
       {
         modelErr: {
           clientVersion: (err as PrismaErr)?.clientVersion,

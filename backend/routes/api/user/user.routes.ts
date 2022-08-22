@@ -1,4 +1,4 @@
-import { loginUser, registerUser } from './../../../controllers/user.controller'
+import { loginUser, registerUser, refreshAuth } from './../../../controllers/user.controller'
 import { Router } from 'express'
 
 const router = Router()
@@ -8,5 +8,8 @@ router.get('/login', loginUser)
 
 // Register user route
 router.post('/register', registerUser)
+
+// Refresh access token route
+router.get('/refresh', refreshAuth)
 
 export default router

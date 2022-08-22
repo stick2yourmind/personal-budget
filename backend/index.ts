@@ -1,10 +1,14 @@
 import express from 'express'
 import SERVER_CFG from './config/server.config'
 import appRoutes from './routes/app.routes'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 
 // App middlewares
+// Middleware for binding req.headers.cookie to req.cookies
+app.use(cookieParser())
+
 // Middleware to handle JSON
 app.use(express.json())
 // Middleware to handle urlencoded form data
