@@ -2,10 +2,14 @@ import express from 'express'
 import SERVER_CFG from './config/server.config'
 import appRoutes from './routes/app.routes'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import corsOptions from './utils/cors/cors.util'
 
 const app = express()
 
 // App middlewares
+// Middleware to handle Cross Origin Resource Sharing
+app.use(cors(corsOptions))
 // Middleware for binding req.headers.cookie to req.cookies
 app.use(cookieParser())
 

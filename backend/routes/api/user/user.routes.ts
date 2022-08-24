@@ -4,7 +4,7 @@ import { Router } from 'express'
 const router = Router()
 
 // login user route
-router.get('/login', loginUser)
+router.post('/login', loginUser)
 
 // Register user route
 router.post('/register', registerUser)
