@@ -27,8 +27,7 @@ const Navbar = () => {
           }
         </button>
       </div>
-      { isNavOpen &&
-        <motion.nav className="nav__menu"
+      <motion.nav className={isNavOpen ? 'nav__menu--expanded' : 'nav__menu'}
         key="menu"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -39,7 +38,6 @@ const Navbar = () => {
             <li className="nav__item">Sobre Nosotros</li>
           </ul>
         </motion.nav>
-      }
     </NavbarStyle>
   )
 }
