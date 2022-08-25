@@ -1,35 +1,45 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { UserInfo } from '../../utils';
-import { clearLocalStorage, persistLocalStorage } from '../../utilities';
+import { AccessTokenType } from './../../ts/user/user.d'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+// import { clearLocalStorage, persistLocalStorage } from '../../utilities'
+import { UserInfo, DataLogin } from '../../ts/user'
+import { Role } from '../../ts/roles'
 
 export const EmptyUserState: UserInfo = {
-  id: 0,
-  name: '',
-  email: ''
-};
+  accessToken: undefined,
+  email: undefined,
+  id: undefined,
+  name: undefined,
+  role: Role.NOT_AUTH
+}
 
-export const UserKey = 'user';
+const userInitializer = () => {
+  // const user = localStorage.getItem('user')
+  // if (user)
+  //   // In order to be more secure, in the future, this is going to make a request to auth
+  //   return JSON.parse(user)
+  return EmptyUserState
+}
+
+export const UserKey = 'user'
 
 export const userSlice = createSlice({
+  initialState: userInitializer(),
   name: 'user',
-  initialState: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : EmptyUserState,
   reducers: {
-    createUser: (state, action) => {
-      persistLocalStorage<UserInfo>(UserKey, action.payload);
-      return action.payload;
+    clearUser: () => {
+      // clearLocalStorage(UserKey)
+      return EmptyUserState
     },
-    updateUser: (state, action) => {
-      const result = { ...state, ...action.payload };
-      persistLocalStorage<UserInfo>(UserKey, result);
-      return result;
+    createUser: (state, action:PayloadAction<DataLogin>) => {
+      // persistLocalStorage<UserInfo>(UserKey, action.payload.email)
+      return action.payload
     },
-    resetUser: () => {
-      clearLocalStorage(UserKey);
-      return EmptyUserState;
+    updateAccessToken: (state, action:PayloadAction<AccessTokenType>) => {
+      state.accessToken = action.payload
     }
   }
-});
+})
 
-export const { createUser, updateUser, resetUser } = userSlice.actions;
+export const { createUser, updateAccessToken, clearUser } = userSlice.actions
 
-export default userSlice.reducer;
+export default userSlice.reducer

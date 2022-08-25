@@ -28,7 +28,7 @@ module.exports = {
   rules: {
     curly: ['warn', 'multi'],
     'max-len': ['warn', {
-      code: 105,
+      code: 120,
       ignoreComments: true,
       ignoreRegExpLiterals: true,
       ignoreTrailingComments: true
