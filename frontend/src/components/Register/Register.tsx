@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { useMutation } from 'react-query'
 import RegisterStyle from './RegisterStyle'
@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react'
 import { PublicRoutes } from '../../routes'
 
 const Register = () => {
-  const navigate = useNavigate()
   console.log('register')
   const [controller, setController] = useState<AbortController>()
   const { mutate: registerRequest, isLoading, error, isSuccess } = useMutation((data:RegisterForm) => {
@@ -25,7 +24,7 @@ const Register = () => {
     const ctlr = new AbortController()
     setController(ctlr)
 
-    return () => { ctlr.abort() }
+    return () => { controller && controller.abort() }
   }, [])
   // it only is triggered after succesful validation
   const onSubmitRegister = (regValues:RegisterForm) => {
