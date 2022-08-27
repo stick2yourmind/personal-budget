@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { useMutation } from 'react-query'
 import RegisterStyle from './RegisterStyle'
-import TextField from '../TextField/Textfield'
+import { Textfield } from '../component.reference'
 import { registerInit, RegisterSchema } from '../utils.reference'
 import { RegisterForm, DataRegUserRequest } from '../ts.reference'
 import { register } from '../../api'
@@ -26,7 +26,7 @@ const Register = () => {
 
     return () => { controller && controller.abort() }
   }, [])
-  // it only is triggered after succesful validation
+  // it only is triggered after successful validation
   const onSubmitRegister = (regValues:RegisterForm) => {
     const data: DataRegUserRequest = {
       email: regValues.email,
@@ -47,10 +47,10 @@ const Register = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <TextField label='Nombre' name='name' type='text' placeholder="Nombre" focus/>
-            <TextField label='Email' name='email' type='email' placeholder="Correo electronico"/>
-            <TextField label='Password' name='password' type='password' placeholder="Password"/>
-            <TextField label='passwordConfirmation' name='passwordConfirmation' type='Password'
+            <Textfield label='Nombre' name='name' type='text' placeholder="Nombre" focus/>
+            <Textfield label='Email' name='email' type='email' placeholder="Correo electronico"/>
+            <Textfield label='Password' name='password' type='password' placeholder="Password"/>
+            <Textfield label='passwordConfirmation' name='passwordConfirmation' type='Password'
             placeholder="Password"/>
             <button className='form__submit-btn' type='submit'>Registrarse</button>
             {!isLoading && error &&
