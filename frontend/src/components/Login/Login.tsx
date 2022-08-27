@@ -44,7 +44,7 @@ const Login = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Email' name='email' type='email' placeholder="Correo electronico" focus/>
+            <Textfield label='Email' name='email' type='email' placeholder="Correo electronico"/>
             <Textfield label='Password' name='password' type='password' placeholder="Password"/>
             <button className='form__submit-btn' type='submit'>Ingresar</button>
             {!isLoading && error &&

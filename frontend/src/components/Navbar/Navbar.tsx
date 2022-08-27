@@ -2,6 +2,8 @@ import NavbarStyle from './NavbarStyle'
 import { logo, close, open } from '../img.reference'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Navlink from './NavLink'
+import { PublicRoutes } from '../../routes'
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
@@ -33,9 +35,15 @@ const Navbar = () => {
         animate={{ opacity: 1 }}
         >
           <ul className="nav__list">
-            <li className="nav__item">Inicio</li>
-            <li className="nav__item">Ingresar</li>
-            <li className="nav__item">Sobre Nosotros</li>
+            <li className="nav__item">
+              <Navlink to={PublicRoutes.HOME} title='Home'/>
+            </li>
+            <li className="nav__item">
+              <Navlink to={PublicRoutes.LOGIN} title='Sign'/>
+            </li>
+            <li className="nav__item">
+              <Navlink to={PublicRoutes.FAQ} title="FAQ"/>
+            </li>
           </ul>
         </motion.nav>
     </NavbarStyle>
