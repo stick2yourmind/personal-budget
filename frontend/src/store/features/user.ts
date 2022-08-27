@@ -1,4 +1,4 @@
-import { AccessTokenType } from './../../ts/user/user.d'
+import { AccessTokenType } from '../../ts/user/user'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import { clearLocalStorage, persistLocalStorage } from '../../utilities'
 import { UserInfo, DataLogin } from '../../ts/user'

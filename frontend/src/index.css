@@ -3,11 +3,13 @@
   margin: 0;
   padding: 0;
   border: 0;
+  font-family: 'Quicksand', sans-serif;
 }
 :root {
   --bg-light: #f5f5f5;
   --cl-text: whitesmoke;
   --bg-dark: #0b0a0a;
+  --dark-glass: rgb(0 0 0 /0.6);
   font-family: 'Julius Sans One', sans-serif;
   font-size: 62.5%;
   line-height: 24px;

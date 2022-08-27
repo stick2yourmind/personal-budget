@@ -8,3 +8,12 @@ export interface FailedResponse{
   message: string
   statusCode: number
 }
+
+export interface DataRegUserResponse{
+  _id: string
+  address: string
+  email: string
+  name: string
+  phone: number
+  registered: boolean
+}

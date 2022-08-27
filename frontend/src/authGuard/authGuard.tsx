@@ -13,10 +13,8 @@ const privatedNotValidated = () => <Navigate replace to={PrivateRoutes.PRIVATE} 
 export const AuthGuard = ({ allowedRoles }: Props) => {
   const userState = useSelector((store: AppStore) => store.user)
   return (
-    allowedRoles?.includes(user.role)
-    ? <Outlet />
-    : auth?.user
-        ? <Navigate to="/unauthorized" state={{ from: location }} replace />
+    allowedRoles?.includes(user.role)    ? <Outlet />
+    : auth?.user          ? <Navigate to="/unauthorized" state={{ from: location }} replace />
         : <Navigate to="/login" state={{ from: location }} replace />
 );
   )
