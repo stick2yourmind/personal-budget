@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import JWT_CFG from '../../config/jwt.config'
 import { RefreshTokenType, UserIdType } from './../../ts/models.d'
 
-const onlyText = /^[A-Za-z]*$/
+const onlyTextSpaces = /^[A-Za-z ]*$/
 
 /* -------------------------------------------------------------------------- */
 /*                                REGISTER USER                               */
@@ -19,8 +19,8 @@ export const RegisterValidator = Yup.object({
     .typeError('Name must be an string of characters')
     .required('Name is required')
     .matches(
-      onlyText,
-      "Name can only contains alphabet's letters"
+      onlyTextSpaces,
+      "Name can only contains alphabet's letters and spaces"
     ),
   password: Yup.string()
     .typeError('Name must be an string of characters')
