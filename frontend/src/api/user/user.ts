@@ -3,7 +3,7 @@ import { DataLogin, EmailType } from '../../ts/user'
 import api from '../axios'
 
 export interface LoginParams{
-  controllerSignal: AbortController['signal']
+  controllerSignal?: AbortController['signal']
   email: EmailType
   password: string
 }

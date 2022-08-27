@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const SignStyle = styled.div`
-  width: 80vw;  
+  width: 90vw;  
   min-height: calc(100vh - 9rem); 
   margin: auto;
   padding: 2rem;

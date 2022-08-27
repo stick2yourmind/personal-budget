@@ -8,3 +8,8 @@ export interface DataRegUserRequest{
   name: string
   password: string
 }
+
+export interface DataLogUserRequest{
+  email: string
+  password: string
+}

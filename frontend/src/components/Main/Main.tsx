@@ -9,7 +9,7 @@ const Main = () => {
     <MainStyle>
       <Routes>
         <Route path={PublicRoutes.HOME} element={<Home/>} />
-        {/* <Route path={PublicRoutes.LOGIN} element={<Sign/>} /> */}
+        <Route path={PublicRoutes.LOGIN} element={<Sign/>} />
         <Route path={PublicRoutes.REGISTER} element={<Sign/>} />
       </Routes>
     </MainStyle>

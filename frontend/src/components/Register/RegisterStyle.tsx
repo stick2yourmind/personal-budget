@@ -5,6 +5,7 @@ const RegisterStyle = styled.div`
   justify-content: start;
   align-items: center;
   flex-direction: column;
+  width: 100%;
   .form__title{
     font-size: 2.5rem;
   }
@@ -15,10 +16,11 @@ const RegisterStyle = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
   }
   .inp-field{
     line-height: 3rem;
-    width: 45rem;
+    width: 100%;
     color: rgb(0, 105, 92);
     font-weight: 700;
     font-size: 1.3rem;
@@ -38,6 +40,7 @@ const RegisterStyle = styled.div`
     font-weight: 700;
     font-family: 'Roboto',sans-serif;
     color: var(--bg-dark);
+    background-color: transparent;
   }
 `
 export default RegisterStyle

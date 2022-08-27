@@ -6,6 +6,7 @@ const TextField = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 0.5rem 0;
+  width: 100%;
   .error-field-container{
     display: flex;
   }

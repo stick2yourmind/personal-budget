@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 /*                                 LOGIN USER                                 */
 /* -------------------------------------------------------------------------- */
 
-const LoginValidator = Yup.object({
+export const LoginSchema = Yup.object({
   email: Yup.string()
     .typeError('Name must be an string of characters')
     .required('Email is required')
@@ -20,5 +20,3 @@ export const loginInit = {
   email: '',
   password: ''
 }
-
-export default LoginValidator

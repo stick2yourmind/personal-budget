@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react'
 import { PublicRoutes } from '../../routes'
 
 const Register = () => {
-  console.log('register')
   const [controller, setController] = useState<AbortController>()
   const { mutate: registerRequest, isLoading, error, isSuccess } = useMutation((data:RegisterForm) => {
     return register({
@@ -47,7 +46,7 @@ const Register = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Nombre' name='name' type='text' placeholder="Nombre" focus/>
+            <Textfield label='Nombre' name='name' type='text' placeholder="Nombre"/>
             <Textfield label='Email' name='email' type='email' placeholder="Correo electronico"/>
             <Textfield label='Password' name='password' type='password' placeholder="Password"/>
             <Textfield label='passwordConfirmation' name='passwordConfirmation' type='Password'
@@ -59,7 +58,7 @@ const Register = () => {
           </>
         </FormikForm>
       </Formik>
-      <Link className='form__sign-other' to='/sign/login'>
+      <Link className='form__sign-other' to={PublicRoutes.LOGIN}>
         Ingresar
       </Link>
     </RegisterStyle>
