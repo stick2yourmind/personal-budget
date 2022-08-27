@@ -36,7 +36,7 @@ const Login = () => {
   return (
     <LoginStyle>
       {isSuccess && <Navigate to={PublicRoutes.HOME} replace={true} />}
-      <h3 className='form__title'>Ingresa</h3>
+      <h3 className='form__title'>Login</h3>
       <Formik
         initialValues={loginInit}
         validationSchema={LoginSchema}
@@ -44,9 +44,9 @@ const Login = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Email' name='email' type='email' placeholder="Correo electronico"/>
+            <Textfield label='Email' name='email' type='email' placeholder="Email"/>
             <Textfield label='Password' name='password' type='password' placeholder="Password"/>
-            <button className='form__submit-btn' type='submit'>Ingresar</button>
+            <button className='form__submit-btn' type='submit'>Sign in</button>
             {!isLoading && error &&
               <p className='errMsg'>{`Un error ha ocurrido, reintente nuevamente: ${error}`}</p>
             }
@@ -54,7 +54,7 @@ const Login = () => {
         </FormikForm>
       </Formik>
       <Link className='form__sign-other' to={PublicRoutes.REGISTER}>
-        Registrarse
+        Sign up
       </Link>
     </LoginStyle>
   )

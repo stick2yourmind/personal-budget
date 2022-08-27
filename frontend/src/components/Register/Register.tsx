@@ -38,7 +38,7 @@ const Register = () => {
   return (
     <RegisterStyle>
       {isSuccess && <Navigate to={PublicRoutes.HOME} replace={true} />}
-      <h3 className='form__title'>Crea tu cuenta</h3>
+      <h3 className='form__title'>Create your account</h3>
       <Formik
         initialValues={registerInit}
         validationSchema={RegisterSchema}
@@ -46,12 +46,12 @@ const Register = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Nombre' name='name' type='text' placeholder="Nombre"/>
-            <Textfield label='Email' name='email' type='email' placeholder="Correo electronico"/>
+            <Textfield label='Nombre' name='name' type='text' placeholder="Name"/>
+            <Textfield label='Email' name='email' type='email' placeholder="Email"/>
             <Textfield label='Password' name='password' type='password' placeholder="Password"/>
             <Textfield label='passwordConfirmation' name='passwordConfirmation' type='Password'
-            placeholder="Password"/>
-            <button className='form__submit-btn' type='submit'>Registrarse</button>
+            placeholder="Password confirmation"/>
+            <button className='form__submit-btn' type='submit'>Sign up</button>
             {!isLoading && error &&
               <p className='errMsg'>{`Un error ha ocurrido, reintente nuevamente: ${error}`}</p>
             }
@@ -59,7 +59,7 @@ const Register = () => {
         </FormikForm>
       </Formik>
       <Link className='form__sign-other' to={PublicRoutes.LOGIN}>
-        Ingresar
+        Sign in
       </Link>
     </RegisterStyle>
   )
