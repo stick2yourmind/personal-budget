@@ -1,8 +1,7 @@
 import MainStyle from './MainStyle'
-import { Home } from '../../pages/Home'
 import { Route, Routes } from 'react-router-dom'
 import { PublicRoutes } from '../../routes'
-import { Sign } from '../../pages/Sign'
+import { Faq, Sign, Home } from '../pages.reference'
 
 const Main = () => {
   return (
@@ -11,6 +10,7 @@ const Main = () => {
         <Route path={PublicRoutes.HOME} element={<Home/>} />
         <Route path={PublicRoutes.LOGIN} element={<Sign/>} />
         <Route path={PublicRoutes.REGISTER} element={<Sign/>} />
+        <Route path={PublicRoutes.FAQ} element={<Faq/>} />
       </Routes>
     </MainStyle>
   )
