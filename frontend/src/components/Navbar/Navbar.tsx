@@ -3,10 +3,13 @@ import { logo, close, open } from '../img.reference'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Navlink from './NavLink'
-import { PublicRoutes } from '../../routes'
+import { PrivateRoutes, PublicRoutes } from '../../routes'
+import useRoleGuard from '../../hooks/useRoleGuard'
+import { Role } from '../ts.reference'
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
+  const authState = useRoleGuard({ allowedRoles: [Role.USER] })
   return (
     <NavbarStyle>
       <div className="nav__primary">
@@ -38,9 +41,14 @@ const Navbar = () => {
             <li className="nav__item">
               <Navlink to={PublicRoutes.HOME} title='Home'/>
             </li>
-            <li className="nav__item">
-              <Navlink to={PublicRoutes.LOGIN} title='Sign'/>
-            </li>
+            {!authState
+              ? <li className="nav__item">
+                  <Navlink to={PublicRoutes.LOGIN} title='Sign'/>
+                </li>
+              : <li className="nav__item">
+                  <Navlink to={PrivateRoutes.DASHBOARD} title='Dashboard'/>
+                </li>
+            }
             <li className="nav__item">
               <Navlink to={PublicRoutes.FAQ} title="FAQ"/>
             </li>

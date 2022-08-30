@@ -32,7 +32,11 @@ export const userSlice = createSlice({
     },
     createUser: (state, action:PayloadAction<DataLogin>) => {
       // persistLocalStorage<UserInfo>(UserKey, action.payload.email)
-      return action.payload
+      state.accessToken = action.payload.accessToken
+      state.email = action.payload.email
+      state.id = action.payload.userId
+      state.name = action.payload.name
+      state.role = action.payload.role
     },
     updateAccessToken: (state, action:PayloadAction<AccessTokenType>) => {
       state.accessToken = action.payload

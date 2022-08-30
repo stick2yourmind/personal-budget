@@ -8,10 +8,25 @@ import { LoginForm, DataLogUserRequest } from '../ts.reference'
 import { login } from '../../api'
 import { useEffect, useState } from 'react'
 import { PublicRoutes } from '../../routes'
+import { useDispatch } from 'react-redux'
+import { createUser } from '../../store/features/user'
 
+export interface DataLogin{
+  data:{
+    accessToken: string
+    email: string
+    name: string
+    role: number
+    userId: number
+  }
+}
 const Login = () => {
   const [controller, setController] = useState<AbortController>()
-  const { mutate: loginRequest, isLoading, error, isSuccess } = useMutation((data:LoginForm) => {
+  const dispatch = useDispatch()
+  const {
+    mutate: loginRequest, isLoading, error, isSuccess,
+    data
+  } = useMutation<DataLogin, unknown, LoginForm>((data) => {
     return login({
       controllerSignal: controller?.signal,
       email: data.email,
@@ -24,6 +39,12 @@ const Login = () => {
 
     return () => { controller && controller.abort() }
   }, [])
+
+  useEffect(() => {
+    if (data)
+      dispatch(createUser(data.data))
+  }, [data])
+
   // it only is triggered after successful validation
   const onSubmitRegister = (regValues:LoginForm) => {
     const data: DataLogUserRequest = {
@@ -32,7 +53,6 @@ const Login = () => {
     }
     loginRequest(data)
   }
-
   return (
     <LoginStyle>
       {isSuccess && <Navigate to={PublicRoutes.HOME} replace={true} />}

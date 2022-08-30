@@ -11,7 +11,7 @@ const Navlink:React.FC<NavlinkProps> = ({ to, title }) => {
   return (
     <>
     <Link to={to} className='navbarlist__link'>{title}</Link>
-    {(location.pathname === to) &&
+    {(location.pathname.toLowerCase() === to) &&
         <motion.div layoutId="navlink__underline" className='navlink__underline'></motion.div>
     }
     </>

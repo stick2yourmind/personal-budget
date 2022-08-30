@@ -1,5 +1,5 @@
 export const PrivateRoutes = {
-  DASHBOARD: 'dashboard',
-  PRIVATE: 'private',
-  PROFILE: 'profile'
+  DASHBOARD: '/dashboard',
+  PRIVATE: '/private',
+  PROFILE: '/profile'
 }
