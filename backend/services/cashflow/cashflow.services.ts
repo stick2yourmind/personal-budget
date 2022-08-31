@@ -2,7 +2,8 @@ import { ValidationError } from 'yup'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import CustomError from '../../utils/error/customError.utils'
 import {
-  createCashflowModel, getCashflowModel, delCashflowModel, updCashflowModel
+  createCashflowModel, getCashflowModel, delCashflowModel, updCashflowModel,
+  getBalanceCashflowModel
 } from '../../models/cashflow/cashflow.model'
 import { ErrorDetails } from '../../ts/utils'
 import {
@@ -10,7 +11,7 @@ import {
 } from '../../utils/validators/cashflow.validator'
 import { accessTokenVerifier } from '../../utils/validators/jwt.validator'
 import {
-  CreateCashflowService, GetCashflowService, DelCashflowService, UpdCashflowService
+  CreateCashflowService, GetCashflowService, DelCashflowService, UpdCashflowService, GetBalanceCashflowService
 } from '../../ts/services'
 
 export const createCashflowService:CreateCashflowService = async (payload) => {
@@ -30,7 +31,7 @@ export const createCashflowService:CreateCashflowService = async (payload) => {
       details: payload.details,
       id: cashflow.id,
       isExpense: payload.isExpense,
-      userId: Number(payload.userId)
+      userId: Number(user.id)
     }
   } catch (err) {
     if (err instanceof CustomError) {
@@ -140,6 +141,30 @@ export const updateCashflowService:UpdCashflowService = async (payload) => {
       }
     else throw new CustomError('No cashflow records could be found',
       { detailMsg: 'No cashflow records could be found' }, STATUS.NOT_FOUND)
+  } catch (err) {
+    if (err instanceof CustomError) {
+      const details:ErrorDetails = {
+        modelErr: (err as CustomError)?.details?.modelErr,
+        serviceErr: 'Error at service while trying to update a cashflow record'
+      }
+      throw new CustomError(err.message, details, err.statusCode)
+    }
+    if (err instanceof ValidationError)
+      throw new CustomError(
+        'Error while trying to update a cashflow record: ' + err.errors,
+        { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
+    throw new CustomError('Error while trying to update a cashflow record',
+      { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
+  }
+}
+
+export const getBalanceCashflowService:GetBalanceCashflowService = async (payload) => {
+  try {
+    const user = accessTokenVerifier({ accessToken: payload.accessToken ? payload.accessToken : null })
+    const balance = await getBalanceCashflowModel({
+      userId: user.id
+    })
+    return balance
   } catch (err) {
     if (err instanceof CustomError) {
       const details:ErrorDetails = {

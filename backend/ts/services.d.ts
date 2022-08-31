@@ -1,4 +1,4 @@
-import { RefreshTokenType } from './models.d'
+import { AccessTokenType, RefreshTokenType } from './models.d'
 import { Cashflow } from '@prisma/client'
 import { UserDataResponse, CashflowDataResponse, OffsetType } from '../ts/controllers'
 import { CreateUser, GetUser, PasswordType, CreateCashflow } from '../ts/models'
@@ -40,6 +40,11 @@ export interface UpdCashflowReq extends Pick<Cashflow, 'amount' | 'category' | '
   accessToken?: string
 }
 
+export interface GetBalanceCashflowReq {
+  accessToken?: AccessTokenType
+}
+
 export type GetCashflowService = (params:GetCashflowReq) => Promise<CashflowDataResponseRelated>
 export type DelCashflowService = (params:DelCashflowReq) => Promise<CashflowDataResponseRelated>
 export type UpdCashflowService = (params:UpdCashflowReq) => Promise<CashflowDataResponseRelated>
+export type GetBalanceCashflowService = (params:GetBalanceCashflowReq) => Promise<CashflowDataResponseRelated>

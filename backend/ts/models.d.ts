@@ -43,10 +43,13 @@ export interface CreateCashflow{
   category: CategoryType
   details: DetailsType
   isExpense: IsExpenseType
-  userId: UserIdType
+  userId?: UserIdType
 }
 export interface GetCashflow extends Pick<Cashflow, 'id'>{
   offset?: number
+  userId: UserIdType
+}
+export interface GetBalanceCashflow {
   userId: UserIdType
 }
 export interface UpdateCashflow {
@@ -65,3 +68,8 @@ export interface ModelName {
   Cashflow: 'Cashflow'
   User: 'User'
 }
+export interface BalanceGroup{
+  _sum?:{amount: AmountType}
+  isExpense?: IsExpenseType
+}
+export type CashflowBalanceGrouped = BalanceGroup[]

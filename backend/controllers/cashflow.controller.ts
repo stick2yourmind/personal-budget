@@ -3,21 +3,21 @@ import { NextFunction, Request, Response } from 'express'
 import STATUS from '../utils/constants/httpStatus.utils'
 import {
   createCashflowService, getCashflowService,
-  deleteCashflowService, updateCashflowService
+  deleteCashflowService, updateCashflowService,
+  getBalanceCashflowService
 } from '../services/cashflow/cashflow.services'
 
 export const createCashflowCtrlr = async (req:Request, res:Response, next:NextFunction) => {
   try {
     const authHeader = req.headers.authorization
     const accessToken = authHeader?.split(' ')[1]
-    const { amount, category, details, isExpense, userId } = req.body
+    const { amount, category, details, isExpense } = req.body
     const createCashflowMsg = await createCashflowService({
       accessToken,
       amount,
       category,
       details,
-      isExpense,
-      userId
+      isExpense
     })
     const response = apiSuccessResponse(createCashflowMsg, STATUS.OK)
     return res.status(STATUS.OK).json(response)
@@ -62,6 +62,19 @@ export const updateCashflowCtrlr = async (req:Request, res:Response, next:NextFu
     const updateCashflowMsg = await
     updateCashflowService({ accessToken, amount, category, details, id: Number(id) })
     const response = apiSuccessResponse(updateCashflowMsg, STATUS.OK)
+    return res.status(STATUS.OK).json(response)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getBalanceCashflowCtrlr = async (req:Request, res:Response, next:NextFunction) => {
+  try {
+    const authHeader = req.headers.authorization
+    const accessToken = authHeader?.split(' ')[1]
+    const getBalanceCashflowMsg = await
+    getBalanceCashflowService({ accessToken })
+    const response = apiSuccessResponse(getBalanceCashflowMsg, STATUS.OK)
     return res.status(STATUS.OK).json(response)
   } catch (error) {
     next(error)
