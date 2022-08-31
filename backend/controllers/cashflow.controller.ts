@@ -8,8 +8,17 @@ import {
 
 export const createCashflowCtrlr = async (req:Request, res:Response, next:NextFunction) => {
   try {
+    const authHeader = req.headers.authorization
+    const accessToken = authHeader?.split(' ')[1]
     const { amount, category, details, isExpense, userId } = req.body
-    const createCashflowMsg = await createCashflowService({ amount, category, details, isExpense, userId })
+    const createCashflowMsg = await createCashflowService({
+      accessToken,
+      amount,
+      category,
+      details,
+      isExpense,
+      userId
+    })
     const response = apiSuccessResponse(createCashflowMsg, STATUS.OK)
     return res.status(STATUS.OK).json(response)
   } catch (error) {

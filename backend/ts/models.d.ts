@@ -38,6 +38,7 @@ export type UserIdType = Cashflow['userId']
 export type CashflowIdType = Cashflow['id']
 
 export interface CreateCashflow{
+  accessToken?: AccessTokenType
   amount: AmountType
   category: CategoryType
   details: DetailsType

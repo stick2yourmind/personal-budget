@@ -12,16 +12,18 @@ import { accessTokenVerifier } from '../../utils/validators/jwt.validator'
 import {
   CreateCashflowService, GetCashflowService, DelCashflowService, UpdCashflowService
 } from '../../ts/services'
+import { TokenExpiredError } from 'jsonwebtoken'
 
 export const createCashflowService:CreateCashflowService = async (payload) => {
   try {
     await CreateCashflowValidator.validate(payload, { abortEarly: false })
+    const user = accessTokenVerifier({ accessToken: payload.accessToken ? payload.accessToken : null })
     const cashflow = await createCashflowModel({
       amount: Number(payload.amount),
       category: payload.category,
       details: payload.details,
       isExpense: payload.isExpense,
-      userId: Number(payload.userId)
+      userId: Number(user.id)
     })
     return {
       amount: Number(payload.amount),
@@ -43,7 +45,10 @@ export const createCashflowService:CreateCashflowService = async (payload) => {
       throw new CustomError(
         'Error while trying to create a user: ' + err.errors,
         { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
-
+    if (err instanceof TokenExpiredError)
+      throw new CustomError(
+        'Error while trying to get a cashflow record: ' + err.message,
+        { serviceErr: JSON.stringify(err.message) }, STATUS.UNAUTHORIZED)
     throw new CustomError('Error while trying to create a user',
       { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
   }
@@ -80,7 +85,10 @@ export const getCashflowService:GetCashflowService = async (payload) => {
       throw new CustomError(
         'Error while trying to get a cashflow record: ' + err.errors,
         { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
-
+    if (err instanceof TokenExpiredError)
+      throw new CustomError(
+        'Error while trying to get a cashflow record: ' + err.message,
+        { serviceErr: JSON.stringify(err.message) }, STATUS.UNAUTHORIZED)
     throw new CustomError('Error while trying to get a cashflow record',
       { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
   }
@@ -112,7 +120,10 @@ export const deleteCashflowService:DelCashflowService = async (payload) => {
       throw new CustomError(
         'Error while trying to delete a cashflow record: ' + err.errors,
         { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
-
+    if (err instanceof TokenExpiredError)
+      throw new CustomError(
+        'Error while trying to get a cashflow record: ' + err.message,
+        { serviceErr: JSON.stringify(err.message) }, STATUS.UNAUTHORIZED)
     throw new CustomError('Error while trying to delete a cashflow record',
       { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
   }
@@ -154,7 +165,10 @@ export const updateCashflowService:UpdCashflowService = async (payload) => {
       throw new CustomError(
         'Error while trying to update a cashflow record: ' + err.errors,
         { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
-
+    if (err instanceof TokenExpiredError)
+      throw new CustomError(
+        'Error while trying to get a cashflow record: ' + err.message,
+        { serviceErr: JSON.stringify(err.message) }, STATUS.UNAUTHORIZED)
     throw new CustomError('Error while trying to update a cashflow record',
       { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
   }
