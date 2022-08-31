@@ -17,6 +17,7 @@ const LoginStyle = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
+    min-height: 21rem;
   }
   .inp-field{
     line-height: 3rem;

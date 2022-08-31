@@ -17,6 +17,7 @@ const RegisterStyle = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
+    min-height: 32.5rem;
   }
   .inp-field{
     line-height: 3rem;

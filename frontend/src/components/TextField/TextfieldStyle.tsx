@@ -2,11 +2,12 @@ import styled from 'styled-components'
 
 const TextField = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding: 0.5rem 0;
   width: 100%;
+  /* height: 7rem; */
   .error-field-container{
     display: flex;
   }
