@@ -28,6 +28,9 @@ export const MotionHeader = styled(motion.div).attrs(({ initial }) => ({
     p{
       line-height: 2rem;
     }
+    @media screen and (min-width: 768px) {
+    width: 66rem;
+    }
 `
 /* -------------------------------------------------------------------------- */
 /*                             ACCORDION'S CONTENT                            */
@@ -52,4 +55,7 @@ export const MotionContent = styled(motion.div).attrs(({ initial }) => ({
 }))`
     display: flex;
     width: 30rem;
+    @media screen and (min-width: 768px) {
+    width: 66rem;
+    }
 `

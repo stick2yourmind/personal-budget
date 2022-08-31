@@ -73,7 +73,7 @@ const Login = () => {
           </>
         </FormikForm>
       </Formik>
-      <Link className='form__sign-other' to={PublicRoutes.REGISTER} onClick={(e) => console.log('clicked')}>
+      <Link className='form__sign-other' to={PublicRoutes.REGISTER}>
         Sign up
       </Link>
     </LoginStyle>
