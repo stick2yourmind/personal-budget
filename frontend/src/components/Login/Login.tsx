@@ -4,29 +4,20 @@ import { useMutation } from 'react-query'
 import LoginStyle from './LoginStyle'
 import { Textfield } from '../component.reference'
 import { loginInit, LoginSchema } from '../utils.reference'
-import { LoginForm, DataLogUserRequest } from '../ts.reference'
+import { LoginForm, DataLoginUserRequest, DataLoginUserResponse } from '../ts.reference'
 import { login } from '../../api'
 import { useEffect, useState } from 'react'
 import { PublicRoutes } from '../../routes'
 import { useDispatch } from 'react-redux'
 import { createUser } from '../../store/features/user'
 
-export interface DataLogin{
-  data:{
-    accessToken: string
-    email: string
-    name: string
-    role: number
-    userId: number
-  }
-}
 const Login = () => {
   const [controller, setController] = useState<AbortController>()
   const dispatch = useDispatch()
   const {
     mutate: loginRequest, isLoading, error, isSuccess,
     data
-  } = useMutation<DataLogin, unknown, LoginForm>((data) => {
+  } = useMutation<DataLoginUserResponse, unknown, LoginForm>((data) => {
     return login({
       controllerSignal: controller?.signal,
       email: data.email,
@@ -47,7 +38,7 @@ const Login = () => {
 
   // it only is triggered after successful validation
   const onSubmitRegister = (regValues:LoginForm) => {
-    const data: DataLogUserRequest = {
+    const data: DataLoginUserRequest = {
       email: regValues.email,
       password: regValues.password
     }

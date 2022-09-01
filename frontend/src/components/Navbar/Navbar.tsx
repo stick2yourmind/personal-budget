@@ -17,7 +17,7 @@ const Navbar = () => {
           <img src={logo} alt="Logo" className='nav__logo--img'/>
           <p className="nav__logo--title">Economicis</p>
         </div>
-        <button onClick={() => { setIsNavOpen(prev => !prev); console.log('cambiado') } } className="nav__btn">
+        <button onClick={() => { setIsNavOpen(prev => !prev) } } className="nav__btn">
           { isNavOpen
             ? <motion.img src={close} alt="Close navigator sections" className='nav__img'
                 key={logo}

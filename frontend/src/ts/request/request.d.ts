@@ -9,7 +9,7 @@ export interface DataRegUserRequest{
   password: string
 }
 
-export interface DataLogUserRequest{
+export interface DataLoginUserRequest{
   email: string
   password: string
 }

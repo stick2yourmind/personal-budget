@@ -17,3 +17,18 @@ export interface DataRegUserResponse{
   phone: number
   registered: boolean
 }
+
+export interface DataLoginUserResponse{
+  data:{
+    accessToken: string
+    email: string
+    name: string
+    role: number
+    userId: number
+  }
+}
+
+export interface DataDashboardResponse{
+  amount: number
+  type: string
+}
