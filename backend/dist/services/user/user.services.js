@@ -76,7 +76,6 @@ const refreshAuthService = async ({ refreshToken }) => {
                 accessToken,
                 email: User.email,
                 name: User.name,
-                refreshToken,
                 role: User.role,
                 userId: User.id
             };

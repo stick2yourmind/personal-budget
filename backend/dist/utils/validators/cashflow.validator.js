@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updCashflowValidator = exports.delCashflowValidator = exports.getCashflowValidator = exports.CreateCashflowValidator = void 0;
+exports.updCashflowValidator = exports.delCashflowValidator = exports.getCashflowByIdValidator = exports.getCashflowValidator = exports.CreateCashflowValidator = void 0;
 const Yup = __importStar(require("yup"));
 const onlyNumbers = /^[0-9]+$/;
 /* -------------------------------------------------------------------------- */
@@ -47,14 +47,25 @@ exports.CreateCashflowValidator = Yup.object({
         .required('userId is required')
 });
 /* -------------------------------------------------------------------------- */
-/*                        GET CASHFLOW RECORD FROM BY ID                      */
+/*                   GET CASHFLOW RECORD WITH LIMIT AND PAGE                  */
 /* -------------------------------------------------------------------------- */
 exports.getCashflowValidator = Yup.object({
+    limit: Yup.string()
+        .matches(onlyNumbers, 'limit must be a positive number')
+        .required('limit is required'),
+    page: Yup.string()
+        .matches(onlyNumbers, 'page must be a positive number')
+        .required('page is required')
+});
+/* -------------------------------------------------------------------------- */
+/*                        GET CASHFLOW RECORD FROM BY ID                      */
+/* -------------------------------------------------------------------------- */
+exports.getCashflowByIdValidator = Yup.object({
     id: Yup.string()
         .matches(onlyNumbers, 'id must be a positive number')
         .required('id is required'),
     offset: Yup.string()
-        .matches(onlyNumbers, 'id must be a positive number')
+        .matches(onlyNumbers, 'offset must be a positive number')
 });
 /* -------------------------------------------------------------------------- */
 /*                      DELETE CASHFLOW RECORD FROM BY ID                     */

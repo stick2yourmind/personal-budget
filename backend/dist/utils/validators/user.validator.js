@@ -31,7 +31,7 @@ const Yup = __importStar(require("yup"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwt_config_1 = __importDefault(require("../../config/jwt.config"));
-const onlyText = /^[A-Za-z]*$/;
+const onlyTextSpaces = /^[A-Za-z ]*$/;
 /* -------------------------------------------------------------------------- */
 /*                                REGISTER USER                               */
 /* -------------------------------------------------------------------------- */
@@ -43,7 +43,7 @@ exports.RegisterValidator = Yup.object({
     name: Yup.string()
         .typeError('Name must be an string of characters')
         .required('Name is required')
-        .matches(onlyText, "Name can only contains alphabet's letters"),
+        .matches(onlyTextSpaces, "Name can only contains alphabet's letters and spaces"),
     password: Yup.string()
         .typeError('Name must be an string of characters')
         .required('Password is required')

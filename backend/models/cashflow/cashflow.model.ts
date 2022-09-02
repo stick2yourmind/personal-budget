@@ -3,7 +3,7 @@ import CustomError from '../../utils/error/customError.utils'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import { PrismaErr } from '../../ts/utils'
 import {
-  GetCashflow, UpdateCashflow, CreateCashflow, DeleteCashflow,
+  GetCashflowById, GetCashflow, UpdateCashflow, CreateCashflow, DeleteCashflow,
   CashflowRelated, GetBalanceCashflow, CashflowBalanceGrouped
 } from '../../ts/models'
 
@@ -42,7 +42,57 @@ export const createCashflowModel = async (payload:CreateCashflow) => {
   }
 }
 
-export const getCashflowModel = async (payload:GetCashflow) => {
+export const getCashflowModel = async ({ page, limit, userId }:GetCashflow) => {
+  try {
+    if (prisma) {
+      const count = await prisma.cashflow.count({
+        where: {
+          // eslint-disable-next-line object-shorthand
+          userId: userId
+        }
+      })
+      console.log('🚀 ~ file: cashflow.model.ts ~ line 49 ~ getCashflowModel ~ count', count)
+      const maxPage = Math.ceil((count / 10)) - 1
+      const cashflow:CashflowRelated = await prisma.cashflow.findMany({
+        select: {
+          amount: true,
+          category: true,
+          details: true,
+          id: true,
+          isExpense: true,
+          updatedAt: true
+        },
+        skip: 10 * page,
+        take: limit,
+        where: {
+          userId: { equals: userId }
+        }
+      })
+      console.log('🚀 ~ file: cashflow.model.ts ~ line 56 ~ getCashflowModel ~ Cashflow', cashflow)
+      return { cashflow, maxPage }
+    } else
+      throw new CustomError(
+        'Error at model while trying to get a cashflow record',
+        { modelErr: 'Prisma database instance is undefined' },
+        STATUS.SERVER_ERROR)
+  } catch (err) {
+    if (err instanceof CustomError)
+      throw new CustomError(err.message, err.details, err.statusCode)
+    const errorCode = (err as PrismaErr)?.code === 'P2002' ? STATUS.CONFLICT : STATUS.SERVER_ERROR
+    throw new CustomError('Error while trying to get a cashflow record',
+      {
+        modelErr: {
+          clientVersion: (err as PrismaErr)?.clientVersion,
+          code: (err as PrismaErr)?.code,
+          message: (err as PrismaErr).message,
+          meta: (err as PrismaErr)?.meta
+        }
+      },
+      errorCode)
+  }
+}
+
+export const getCashflowByIdModel = async (payload:GetCashflowById) => {
   try {
     if (prisma) {
       const Cashflow:CashflowRelated = await prisma.cashflow.findMany({

@@ -45,7 +45,12 @@ export interface CreateCashflow{
   isExpense: IsExpenseType
   userId?: UserIdType
 }
-export interface GetCashflow extends Pick<Cashflow, 'id'>{
+export interface GetCashflow {
+  limit: number
+  page: number
+  userId: UserIdType
+}
+export interface GetCashflowById extends Pick<Cashflow, 'id'>{
   offset?: number
   userId: UserIdType
 }

@@ -27,11 +27,15 @@ export type CreateUserService = (params:CreateUser) => Promise<UserDataResponse>
 
 export type CreateCashflowService = (params:CreateCashflow) => Promise<CashflowDataResponse>
 
-export interface GetCashflowReq extends Pick<Cashflow, 'id' >{
+export interface GetCashflowByIdReq extends Pick<Cashflow, 'id' >{
   accessToken?: string
   offset?: OffsetType
 }
-
+export interface GetCashflowReq {
+  accessToken: string
+  limit: string | number
+  page: string | number
+}
 export interface DelCashflowReq extends Pick<Cashflow, 'id' >{
   accessToken?: string
 }
@@ -44,6 +48,7 @@ export interface GetBalanceCashflowReq {
   accessToken?: AccessTokenType
 }
 
+export type GetCashflowByIdService = (params:GetCashflowByIdReq) => Promise<CashflowDataResponseRelated>
 export type GetCashflowService = (params:GetCashflowReq) => Promise<CashflowDataResponseRelated>
 export type DelCashflowService = (params:DelCashflowReq) => Promise<CashflowDataResponseRelated>
 export type UpdCashflowService = (params:UpdCashflowReq) => Promise<CashflowDataResponseRelated>

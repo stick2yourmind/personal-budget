@@ -2,22 +2,24 @@ import { ValidationError } from 'yup'
 import STATUS from '../../utils/constants/httpStatus.utils'
 import CustomError from '../../utils/error/customError.utils'
 import {
-  createCashflowModel, getCashflowModel, delCashflowModel, updCashflowModel,
+  createCashflowModel, getCashflowModel, delCashflowModel, updCashflowModel, getCashflowByIdModel,
   getBalanceCashflowModel
 } from '../../models/cashflow/cashflow.model'
 import { ErrorDetails } from '../../ts/utils'
 import {
-  CreateCashflowValidator, getCashflowValidator, delCashflowValidator, updCashflowValidator
+  CreateCashflowValidator, getCashflowValidator, getCashflowByIdValidator,
+  delCashflowValidator, updCashflowValidator
 } from '../../utils/validators/cashflow.validator'
 import { accessTokenVerifier } from '../../utils/validators/jwt.validator'
 import {
-  CreateCashflowService, GetCashflowService, DelCashflowService, UpdCashflowService, GetBalanceCashflowService
+  CreateCashflowService, GetCashflowByIdService, DelCashflowService, UpdCashflowService, GetBalanceCashflowService,
+  GetCashflowService
 } from '../../ts/services'
 
 export const createCashflowService:CreateCashflowService = async (payload) => {
   try {
-    await CreateCashflowValidator.validate(payload, { abortEarly: false })
     const user = accessTokenVerifier({ accessToken: payload.accessToken ? payload.accessToken : null })
+    await CreateCashflowValidator.validate({ ...payload, userId: Number(user.id) }, { abortEarly: false })
     const cashflow = await createCashflowModel({
       amount: Number(payload.amount),
       category: payload.category,
@@ -52,9 +54,42 @@ export const createCashflowService:CreateCashflowService = async (payload) => {
 
 export const getCashflowService:GetCashflowService = async (payload) => {
   try {
-    await getCashflowValidator.validate(payload, { abortEarly: false })
+    const { accessToken } = payload
+    const page = Number(payload.page)
+    const limit = Number(payload.limit)
+    const user = accessTokenVerifier({ accessToken })
+    await getCashflowValidator.validate({ limit, page }, { abortEarly: false })
+    const { cashflow, maxPage } = await getCashflowModel({
+      limit,
+      page,
+      userId: user.id
+    })
+    if (cashflow.length)
+      return { maxPage, records: cashflow }
+    else throw new CustomError('No cashflow records could be found',
+      { detailMsg: 'No cashflow records could be found' }, STATUS.NOT_FOUND)
+  } catch (err) {
+    if (err instanceof CustomError) {
+      const details:ErrorDetails = {
+        modelErr: (err as CustomError)?.details?.modelErr,
+        serviceErr: 'Error at service while trying to get a cashflow record'
+      }
+      throw new CustomError(err.message, details, err.statusCode)
+    }
+    if (err instanceof ValidationError)
+      throw new CustomError(
+        'Error while trying to get a cashflow record: ' + err.errors,
+        { serviceErr: JSON.stringify(err.errors) }, STATUS.UNPROCESSABLE_ENTITY)
+    throw new CustomError('Error while trying to get a cashflow record',
+      { detailMsg: (err as Error).message }, STATUS.SERVER_ERROR)
+  }
+}
+
+export const getCashflowByIdService:GetCashflowByIdService = async (payload) => {
+  try {
+    await getCashflowByIdValidator.validate(payload, { abortEarly: false })
     const user = accessTokenVerifier({ accessToken: payload.accessToken ? payload.accessToken : null })
-    const cashflow = await getCashflowModel({
+    const cashflow = await getCashflowByIdModel({
       id: Number(payload.id),
       offset: Number(payload.offset) || 0,
       userId: user.id

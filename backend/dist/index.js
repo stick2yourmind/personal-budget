@@ -7,8 +7,12 @@ const express_1 = __importDefault(require("express"));
 const server_config_1 = __importDefault(require("./config/server.config"));
 const app_routes_1 = __importDefault(require("./routes/app.routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cors_1 = __importDefault(require("cors"));
+const cors_util_1 = __importDefault(require("./utils/cors/cors.util"));
 const app = (0, express_1.default)();
 // App middlewares
+// Middleware to handle Cross Origin Resource Sharing
+app.use((0, cors_1.default)(cors_util_1.default));
 // Middleware for binding req.headers.cookie to req.cookies
 app.use((0, cookie_parser_1.default)());
 // Middleware to handle JSON
