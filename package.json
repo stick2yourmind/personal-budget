@@ -9,7 +9,9 @@
     "backend-dev": "cd ./backend && npx ts-node-dev --respawn index.ts",
     "backend-dev-db-show": "cd ./backend && npx prisma studio",
     "backend-dev-first": "cd ./backend && npx prisma migrate dev --name init && npx ts-node-dev --respawn index.ts",
-    "backend-build": "cd ./backend && tsc --build"
+    "backend-build": "cd ./backend && tsc --build",
+    "backend-first": "cd ./backend && npx prisma migrate dev --name init && tsc --build && node ./dist/index.js"
+    
   },
   "repository": {
     "type": "git",
