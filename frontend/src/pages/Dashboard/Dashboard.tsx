@@ -16,12 +16,14 @@ const Dashboard = () => {
   const { isLoading, error, data }:UseQueryResult<SuccessfulResponse<DataDashboardResponse[]>, Error> =
   useQuery<SuccessfulResponse<DataDashboardResponse[]>, Error>(['balance'],
     (ctrl) => getBalance({ accessToken, controllerSignal: ctrl?.signal }))
+
   useEffect(() => {
     const ctlr = new AbortController()
     setController(ctlr)
 
     return () => { controller && controller.abort() }
   }, [])
+
   return (
     <div>
       <>
