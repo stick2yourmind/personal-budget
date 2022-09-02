@@ -59,7 +59,7 @@ const getCashflowService = async (payload) => {
         if (cashflow.length)
             return { maxPage, records: cashflow };
         else
-            throw new customError_utils_1.default('No cashflow records could be found', { detailMsg: 'No cashflow records could be found' }, httpStatus_utils_1.default.NOT_FOUND);
+            return { maxPage: 0, records: [] };
     }
     catch (err) {
         if (err instanceof customError_utils_1.default) {
