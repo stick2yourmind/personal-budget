@@ -5,12 +5,15 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "backend-install": "cd ./backend && npm i",
+    "backend-prisma-generate": "cd ./backend && npx prisma generate",
     "backend-dev-db-migrate": "cd ./backend && npx prisma migrate dev --name init",
     "backend-dev": "cd ./backend && npx ts-node-dev --respawn index.ts",
     "backend-dev-db-show": "cd ./backend && npx prisma studio",
     "backend-dev-first": "cd ./backend && npx prisma migrate dev --name init && npx ts-node-dev --respawn index.ts",
     "backend-build": "cd ./backend && tsc --build",
-    "backend-first": "cd ./backend && npx prisma migrate dev --name init && tsc --build && node ./dist/index.js"
+    "backend-first": "cd ./backend && npx prisma migrate dev --name init && tsc --build && node ./dist/index.js",
+    "backend-run-build": "cd ./backend && node ./dist/index.js"
     
   },
   "repository": {
