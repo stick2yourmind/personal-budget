@@ -30,5 +30,5 @@ export interface DataLoginUserResponse{
 
 export interface DataDashboardResponse{
   amount: number
-  type: string
+  type: 'income' | 'expense'
 }

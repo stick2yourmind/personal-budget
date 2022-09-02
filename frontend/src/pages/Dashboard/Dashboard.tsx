@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useQuery, UseQueryResult } from 'react-query'
 import { useSelector } from 'react-redux'
 import { getBalance } from '../api.reference'
+import { Balance } from '../component.reference'
 import { RootState } from '../store.reference'
 import { DataDashboardResponse, SuccessfulResponse } from '../ts.reference'
+import DashboardStyle from './DashboardStyle'
 
 export interface Balance{
   amount: number
@@ -25,13 +27,13 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div>
+    <DashboardStyle>
       <>
       {isLoading && <p>Loading...</p>}
       {error && <p>error</p>}
-      {data && <p>{JSON.stringify(data.data)}</p>}
+      {data && <Balance balance={data.data}/>}
       </>
-    </div>
+    </DashboardStyle>
   )
 }
 export default Dashboard
