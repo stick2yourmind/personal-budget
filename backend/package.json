@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "back-dev": "npx ts-node-dev --respawn index.ts",
     "back-dev-db-show": "npx prisma studio",
-    "back-dev-db-migrate": "npx prisma migrate dev --name init"
+    "back-dev-db-migrate": "npx prisma migrate dev --name init",
+    "back-dev-all": "npx prisma migrate dev --name init && npx ts-node-dev --respawn index.ts"
   },
   "engines": {
     "node": ">16.0"
