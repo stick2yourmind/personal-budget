@@ -66,8 +66,7 @@ export const getCashflowService:GetCashflowService = async (payload) => {
     })
     if (cashflow.length)
       return { maxPage, records: cashflow }
-    else throw new CustomError('No cashflow records could be found',
-      { detailMsg: 'No cashflow records could be found' }, STATUS.NOT_FOUND)
+    else return { maxPage: 0, records: [] }
   } catch (err) {
     if (err instanceof CustomError) {
       const details:ErrorDetails = {
