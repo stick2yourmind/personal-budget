@@ -32,3 +32,17 @@ export interface DataDashboardResponse{
   amount: number
   type: 'income' | 'expense'
 }
+
+export interface CashflowRecord{
+  amount: number
+  category: string
+  details: string
+  id: number
+  isExpense: boolean
+  updatedAt: Date
+}
+
+export interface DataPaginationResponse{
+  maxPage: number
+  records: CashflowRecord[]
+}

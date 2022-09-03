@@ -18,3 +18,17 @@ export const getBalance = async ({ controllerSignal, accessToken }:BalanceParams
   })
   return res.data
 }
+
+export const getPagination = async ({ controllerSignal, accessToken }:BalanceParams) => {
+  const balanceEndpoint = import.meta.env.VITE_API_CASHFLOW_PAGINATION
+  const res = await api({
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      authorization: `Bearer ${accessToken}`
+    },
+    method: 'get',
+    signal: controllerSignal,
+    url: balanceEndpoint
+  })
+  return res.data
+}
