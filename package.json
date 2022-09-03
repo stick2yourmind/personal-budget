@@ -13,7 +13,8 @@
     "backend-dev-first": "cd ./backend && npx prisma migrate dev --name init && npx ts-node-dev --respawn index.ts",
     "backend-build": "cd ./backend && tsc --build",
     "backend-first": "cd ./backend && npx prisma migrate dev --name init && tsc --build && node ./dist/index.js",
-    "backend-run-build": "cd ./backend && node ./dist/index.js"
+    "backend-run-build": "cd ./backend && node ./dist/index.js",
+    "backend-start": "node backend/dist/index.js"
     
   },
   "repository": {
