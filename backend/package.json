@@ -9,7 +9,8 @@
     "back-dev-db-show": "npx prisma studio",
     "back-dev-db-migrate": "npx prisma migrate dev --name init",
     "back-dev-first": "npx prisma migrate dev --name init && npx ts-node-dev --respawn index.ts",
-    "back-build": "tsc --build"
+    "back-build": "tsc --build",
+    "back-run-build": "node ./dist/index.js"
   },
   "engines": {
     "node": ">16.0"
