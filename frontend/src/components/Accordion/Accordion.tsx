@@ -11,13 +11,13 @@ const Accordion:React.FC<AccordionProps> = ({ title, content }) => {
         animate={isOpen ? 'active' : 'inactive'}
         onClick={() => setIsOpen(prev => !prev)}
         >
-      <p>{title}</p>
+      <p className='text--title'>{title}</p>
       </MotionHeader>
       <AnimatePresence initial={false}>
         {isOpen && (
           <MotionContent
           >
-            {content}
+            <p className='text'>{content}</p>
           </MotionContent>
         )}
       </AnimatePresence>

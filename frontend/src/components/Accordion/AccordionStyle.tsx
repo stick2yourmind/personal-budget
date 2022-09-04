@@ -25,8 +25,11 @@ export const MotionHeader = styled(motion.div).attrs(({ initial }) => ({
     display: flex;
     width: 30rem;
     padding: 0 1rem;
-    p{
-      line-height: 2rem;
+    .text--title{
+      line-height: 3.3rem;
+      font-size: 3rem;
+      padding: 1.5rem 0;
+      font-weight: 600;
     }
     @media screen and (min-width: 768px) {
     width: 66rem;
@@ -55,6 +58,12 @@ export const MotionContent = styled(motion.div).attrs(({ initial }) => ({
 }))`
     display: flex;
     width: 30rem;
+    .text{
+      font-size: 2.5rem;
+      padding: 1.5rem 0;
+      line-height: 3rem;
+      word-spacing: 0.5rem;
+    }
     @media screen and (min-width: 768px) {
     width: 66rem;
     }
