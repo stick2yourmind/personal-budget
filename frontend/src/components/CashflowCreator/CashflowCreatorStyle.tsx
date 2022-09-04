@@ -19,12 +19,19 @@ const CashflowCreatorStyle = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    width: 80%;
   }
   .form__select{
     text-align: center;
     text-align-last: center;
     width: 100%;
-    height: 2rem;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  .form__input{
+    padding: 1rem;
+    font-size: 2rem;
+    margin: 0.5rem;
   }
   .form__submit-btn{
     width: 100%;

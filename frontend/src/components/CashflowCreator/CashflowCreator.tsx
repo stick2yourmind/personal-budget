@@ -49,7 +49,7 @@ const CashflowCreator = () => {
   }
 
   const CustomInputComponent = (props:{name: string, placeholder?: string}) => (
-    <input className="my-custom-input" type="text" {...props} />
+    <input className="form__input" type="text" {...props} />
   )
   return (
     <CashflowCreatorStyle>

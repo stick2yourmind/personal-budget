@@ -48,7 +48,7 @@ const Balance = () => {
               ],
               borderWidth: 1,
               data: [amount.income, amount.expense],
-              label: '# of Votes'
+              label: 'Balance data'
             }
           ],
           labels: ['Income', 'Expense']
@@ -59,15 +59,18 @@ const Balance = () => {
   return (
     <BalanceStyle>
       {isLoading && <p>Loading...</p>}
-      <h1>Balance</h1>
-      <h2>{amountIncome - amountExpense}</h2>
+      <h1 className='balance__title'>Balance</h1>
+      <h2 className='balance__amount'>$ {amountIncome - amountExpense}</h2>
       {((amountExpense || amountIncome) && dataPie)
         ? <>
-            <Pie data={dataPie} />
-            <h3>Amount income: {amountIncome}</h3>
-            <h3>Amount expense: {amountExpense}</h3>
+            <Pie data={dataPie} options={{
+              color: 'whitesmoke',
+              plugins: { legend: { labels: { font: { size: 15 } } }, tooltip: { bodyFont: { size: 15 } } }
+            }} />
+            <h3 className='balance__income'>Amount income: $ {amountIncome}</h3>
+            <h3 className='balance__expense'>Amount expense: $ {amountExpense}</h3>
           </>
-        : <h3>No cashflow record could be found</h3>
+        : <h3 className='balance__empty'>No cashflow record could be found</h3>
       }
       {!isLoading && error &&
       <p className='errMsg'>
