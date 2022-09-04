@@ -26,7 +26,6 @@ const CashflowCreator = () => {
   },
   {
     onSuccess: () => {
-      console.log('success')
       queryClient.invalidateQueries(['pagination'])
       queryClient.invalidateQueries(['balance'])
     }
