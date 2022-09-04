@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { useMutation } from 'react-query'
 import LoginStyle from './LoginStyle'
-import { Textfield } from '../component.reference'
+import { TextField } from '../component.reference'
 import { loginInit, LoginSchema } from '../utils.reference'
 import { LoginForm, DataLoginUserRequest, DataLoginUserResponse } from '../ts.reference'
 import { login } from '../../api'
@@ -55,8 +55,8 @@ const Login = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Email' name='email' type='email' placeholder="Email"/>
-            <Textfield label='Password' name='password' type='password' placeholder="Password"/>
+            <TextField label='Email' name='email' type='email' placeholder="Email"/>
+            <TextField label='Password' name='password' type='password' placeholder="Password"/>
             <button className='form__submit-btn' type='submit'>Sign in</button>
             {!isLoading && error &&
               <p className='errMsg'>{`Un error ha ocurrido, reintente nuevamente: ${error}`}</p>

@@ -1,4 +1,4 @@
-import { Balance, Pagination } from '../component.reference'
+import { Balance, Pagination, CashflowCreator } from '../component.reference'
 import DashboardStyle from './DashboardStyle'
 
 export interface Balance{
@@ -11,6 +11,7 @@ const Dashboard = () => {
     <DashboardStyle>
       <Balance />
       <Pagination />
+      <CashflowCreator />
     </DashboardStyle>
   )
 }

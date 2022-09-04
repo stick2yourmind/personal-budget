@@ -37,8 +37,12 @@ const Pagination = () => {
   return (
     <PaginationStyle>
       {isLoading && <p>Loading...</p>}
-      {error && <p>error</p>}
       {data && pageList(data.data.records)}
+      {!isLoading && error &&
+      <p className='errMsg'>
+        {'An unexpected error has occurred, please try again later in order to get lastest data'}
+      </p>
+      }
     </PaginationStyle>
   )
 }

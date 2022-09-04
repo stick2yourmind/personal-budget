@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { ChartProps, Pie } from 'react-chartjs-2'
 import { DataDashboardResponse, SuccessfulResponse } from '../ts.reference'
@@ -59,7 +59,6 @@ const Balance = () => {
   return (
     <BalanceStyle>
       {isLoading && <p>Loading...</p>}
-      {error && <p>error</p>}
       <h1>Balance</h1>
       <h2>{amountIncome - amountExpense}</h2>
       {((amountExpense || amountIncome) && dataPie)
@@ -69,6 +68,11 @@ const Balance = () => {
             <h3>Amount expense: {amountExpense}</h3>
           </>
         : <h3>No cashflow record could be found</h3>
+      }
+      {!isLoading && error &&
+      <p className='errMsg'>
+        {"An unexpected error has occurred, please try again later in order to get lastest balance's information"}
+      </p>
       }
     </BalanceStyle>
 

@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { useMutation } from 'react-query'
 import RegisterStyle from './RegisterStyle'
-import { Textfield } from '../component.reference'
+import { TextField } from '../component.reference'
 import { registerInit, RegisterSchema } from '../utils.reference'
 import { RegisterForm, DataRegUserRequest } from '../ts.reference'
 import { register } from '../../api'
@@ -46,10 +46,10 @@ const Register = () => {
       >
         <FormikForm className='form__body'>
           <>
-            <Textfield label='Nombre' name='name' type='text' placeholder="Name"/>
-            <Textfield label='Email' name='email' type='email' placeholder="Email"/>
-            <Textfield label='Password' name='password' type='password' placeholder="Password"/>
-            <Textfield label='passwordConfirmation' name='passwordConfirmation' type='Password'
+            <TextField label='Nombre' name='name' type='text' placeholder="Name"/>
+            <TextField label='Email' name='email' type='email' placeholder="Email"/>
+            <TextField label='Password' name='password' type='password' placeholder="Password"/>
+            <TextField label='passwordConfirmation' name='passwordConfirmation' type='Password'
             placeholder="Password confirmation"/>
             <button className='form__submit-btn' type='submit'>Sign up</button>
             {!isLoading && error &&

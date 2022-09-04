@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { useField, ErrorMessage } from 'formik'
-import TextfieldStyle from './TextfieldStyle'
+import TextFieldStyle from './TextFieldStyle'
 
 export interface TextFieldProps{
   disabled?:boolean,
@@ -24,7 +24,7 @@ const TextField:React.FC<TextFieldProps> = ({
     if (focus) inputRef.current?.focus()
   }, [])
   return (
-    <TextfieldStyle>
+    <TextFieldStyle>
         {info && <label className='labelField' htmlFor={field.name}>{label}</label> }
         <input className={`inp-field ${meta.touched && meta.error ? 'isInvalid' : ''} ` }
             {...field} name={name} type={type} placeholder={placeholder || ''}
@@ -34,7 +34,7 @@ const TextField:React.FC<TextFieldProps> = ({
         <div className='error'>
           <ErrorMessage className='error__msg' name={field.name} component="p" />
         </div>
-    </TextfieldStyle>
+    </TextFieldStyle>
   )
 }
 

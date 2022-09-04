@@ -13,3 +13,10 @@ export interface DataLoginUserRequest{
   email: string
   password: string
 }
+
+export interface DataCreateCashflowRequest{
+  amount: number
+  category: string
+  details: string
+  isExpense : boolean
+}

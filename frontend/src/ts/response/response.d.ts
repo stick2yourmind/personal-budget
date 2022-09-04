@@ -46,3 +46,14 @@ export interface DataPaginationResponse{
   maxPage: number
   records: CashflowRecord[]
 }
+
+export interface DataCreateCashflowResponse{
+  data:{
+    amount: number
+    category: string
+    details: string
+    id: number
+    isExpense: boolean
+    userId: number
+  }
+}

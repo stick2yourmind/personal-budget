@@ -1,2 +1,2 @@
-export { default as Textfield } from './Textfield'
-export { default as TextfieldStyle } from './TextfieldStyle'
+export { default as TextField } from './TextField'
+export { default as TextFieldStyle } from './TextFieldStyle'
