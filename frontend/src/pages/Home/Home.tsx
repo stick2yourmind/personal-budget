@@ -5,7 +5,7 @@ const Home = () => {
     <HomeStyle>
       <p className='text'>
       Economicis is your personal finance application where you can classify your income and expenses by
-      categories. You will be able to see a summary of your cashflow in a easily and simple way.
+      categories. You will be able to see a summary of your cashflow easily and in a simple way.
       </p>
       <p className='text'>
       Completely free, it does not contain advertising, nor third-part advertisements and soon historical
