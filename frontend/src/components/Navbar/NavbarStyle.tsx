@@ -102,6 +102,7 @@ const NavbarStyle = styled.div`
     color: whitesmoke;
     list-style: none;
     font-size: 1.5rem;
+    padding: 2rem 0;
   }
   
   .navbarlist{
@@ -117,8 +118,8 @@ const NavbarStyle = styled.div`
   .navbarlist__link{
     text-decoration: none;
     font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1.4rem;
+    font-weight: 700;
+    font-size: 4rem;
   }
   .navbarlist__link--current{
     padding-bottom: 0.5rem;
@@ -128,7 +129,9 @@ const NavbarStyle = styled.div`
     font-size: 1.8rem;
   }
   .navbarlist__link:visited{
-    color: var(--cl-text)
+    color: var(--cl-text);
+    font-weight: 700;
+    font-size: 4rem;
   }
   .navlink__underline{
     min-width: 100%;
