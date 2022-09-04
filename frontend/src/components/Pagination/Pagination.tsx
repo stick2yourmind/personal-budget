@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useQuery, UseQueryResult } from 'react-query'
 import { useSelector } from 'react-redux'
 import { getPagination } from '../../api'
+import { CashflowMutator } from '../component.reference'
 import { RootState } from '../store.reference'
 import { SuccessfulResponse, DataPaginationResponse } from '../ts.reference'
 import PaginationStyle from './PaginationStyle'
@@ -17,13 +18,7 @@ const Pagination = () => {
     return (
     <ul className='record__list'>
       {
-        records.map(record =>
-          <li key={record.id} className="record__item">
-          <p className='record__amount'>amount: {record.amount}</p>
-          <p className='record__category'>category: {record.category}</p>
-          <p className='record__details'>details: {record.details}</p>
-          <p className='record__type'>type: {record.isExpense ? 'expense' : 'income'}</p>
-        </li>)
+        records.map(record => <CashflowMutator key={record.id} cashflow={record} />)
       }
     </ul>)
   }

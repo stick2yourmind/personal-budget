@@ -38,12 +38,5 @@ const PaginationStyle = styled.div`
     flex-direction: column;
     margin: 1rem 0px;
   }
-  .record__amount, .record__category, .record__details, .record__type{
-    font-size: 2rem;
-    line-height: 2.5rem;
-    font-weight: 700;
-    color: #b9383e;
-    text-align: center;
-  }
 `
 export default PaginationStyle
