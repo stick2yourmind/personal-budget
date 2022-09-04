@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const TextField = styled.div`
+const TextFieldStyle = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,4 +20,4 @@ const TextField = styled.div`
   }
 `
 
-export default TextField
+export default TextFieldStyle
