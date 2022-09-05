@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import { ErrorMessage, Field, Form, Formik, FormikConfig } from 'formik'
 
-export interface CashflowFormProps<K>{
+export interface CashflowFormProps<K=undefined>{
   btnText: string
   cashflow?:K
   init: K
