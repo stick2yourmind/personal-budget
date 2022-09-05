@@ -57,3 +57,13 @@ export interface DataCreateCashflowResponse{
     userId: number
   }
 }
+export interface DataEditCashflowResponse{
+  data:{
+    updated: boolean
+  }
+}
+export interface DataDeleteCashflowResponse{
+  data:{
+    deleted: boolean
+  }
+}

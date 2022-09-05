@@ -1,4 +1,4 @@
-import { DataCreateCashflowRequest } from '../../ts'
+import { DataCreateCashflowRequest, DataEditCashflowRequest } from '../../ts'
 import api from '../axios'
 
 export interface BalanceParams{
@@ -15,7 +15,12 @@ export interface DeleteParams{
   controllerSignal?: AbortController['signal']
   id: number
 }
-
+export interface EditParams{
+  accessToken?: string
+  controllerSignal?: AbortController['signal']
+  dataReq: DataEditCashflowRequest
+  id: number
+}
 export const getBalance = async ({ controllerSignal, accessToken }:BalanceParams) => {
   const balanceEndpoint = import.meta.env.VITE_API_CASHFLOW_BALANCE
   const res = await api({
@@ -60,7 +65,7 @@ export const postCreateCashflow = async ({ controllerSignal, accessToken, dataRe
 }
 
 export const deleteCashflowById = async ({ controllerSignal, accessToken, id }:DeleteParams) => {
-  const balanceEndpoint = import.meta.env.VITE_API_CASHFLOW_CREATE
+  const endpoint = import.meta.env.VITE_API_CASHFLOW_DELETE
   const res = await api({
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -68,7 +73,22 @@ export const deleteCashflowById = async ({ controllerSignal, accessToken, id }:D
     },
     method: 'delete',
     signal: controllerSignal,
-    url: balanceEndpoint + id
+    url: endpoint + id
+  })
+  return res.data
+}
+
+export const EditCashflow = async ({ controllerSignal, accessToken, dataReq, id }:EditParams) => {
+  const endpoint = import.meta.env.VITE_API_CASHFLOW_EDIT
+  const res = await api({
+    data: dataReq,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      authorization: `Bearer ${accessToken}`
+    },
+    method: 'put',
+    signal: controllerSignal,
+    url: endpoint + id
   })
   return res.data
 }

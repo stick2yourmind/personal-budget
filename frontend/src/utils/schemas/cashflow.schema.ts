@@ -22,6 +22,7 @@ export interface CreateCashflowInitType{
 export const CreateCashflowValidator:CreateCashflowValidatorType = Yup.object({
   amount: Yup.number()
     .typeError('amount must be a number')
+    .positive('amount must be a positive number')
     .required('amount is required'),
   category: Yup.string()
     .typeError('category must be an string of characters')
@@ -40,3 +41,7 @@ export const CreateCashflowInit:CreateCashflowInitType = {
   details: '',
   isExpense: ''
 }
+
+export const EditCashflowInit = CreateCashflowInit
+
+export const EditCashflowValidator = CreateCashflowValidator

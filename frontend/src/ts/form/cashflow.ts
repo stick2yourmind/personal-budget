@@ -4,3 +4,5 @@ export interface CreateCashflowForm{
   details: string
   isExpense: string
 }
+
+export type EditCashflowForm = CreateCashflowForm

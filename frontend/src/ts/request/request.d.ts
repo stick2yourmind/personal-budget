@@ -20,3 +20,5 @@ export interface DataCreateCashflowRequest{
   details: string
   isExpense : boolean
 }
+
+export type DataEditCashflowRequest = Omit<DataCreateCashflowRequest, 'isExpense'>

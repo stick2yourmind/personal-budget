@@ -12,7 +12,7 @@ const CashflowCreatorStyle = styled.div`
     background: transparent;
   }
   .add__img{
-    height: 100%;
+    width: 100%;
   }
   .form__body{
     display: flex;
