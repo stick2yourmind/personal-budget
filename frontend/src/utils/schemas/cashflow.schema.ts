@@ -4,7 +4,22 @@ import * as Yup from 'yup'
 /*                          CREATE A CASHFLOW RECORD                          */
 /* -------------------------------------------------------------------------- */
 
-export const CreateCashflowValidator = Yup.object({
+export interface CreateCashflowSchema{
+  amount: number
+  category: string
+  details: string
+  isExpense: string
+}
+
+export type CreateCashflowValidatorType = Yup.SchemaOf<CreateCashflowSchema>
+
+export interface CreateCashflowInitType{
+  amount: number
+  category: string
+  details: string
+  isExpense: string
+}
+export const CreateCashflowValidator:CreateCashflowValidatorType = Yup.object({
   amount: Yup.number()
     .typeError('amount must be a number')
     .required('amount is required'),
@@ -19,8 +34,8 @@ export const CreateCashflowValidator = Yup.object({
     .required('Type is required')
 })
 
-export const CreateCashflowInit = {
-  amount: '',
+export const CreateCashflowInit:CreateCashflowInitType = {
+  amount: 0,
   category: '',
   details: '',
   isExpense: ''

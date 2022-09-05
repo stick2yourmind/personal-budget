@@ -1,7 +1,7 @@
 import CashflowCreatorStyle from './CashflowCreatorStyle'
 import { add } from '../img.reference'
 import { useEffect, useState } from 'react'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
+import { FormikHelpers } from 'formik'
 import { CreateCashflowInit, CreateCashflowValidator } from '../utils.reference'
 import { CreateCashflowForm } from '../../ts/form/cashflow'
 import { useMutation, useQueryClient } from 'react-query'
@@ -9,6 +9,7 @@ import { DataCreateCashflowResponse, DataCreateCashflowRequest } from '../ts.ref
 import { postCreateCashflow } from '../../api'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store.reference'
+import { CashflowForm } from '../CashflowForm'
 
 const CashflowCreator = () => {
   const [newCashflow, setNewCashflow] = useState<boolean>(false)
@@ -38,6 +39,7 @@ const CashflowCreator = () => {
   }, [])
 
   const onSubmitNewCashflow = (formValues:CreateCashflowForm, action:FormikHelpers<CreateCashflowForm>) => {
+    console.log('validado')
     createCashflowRequest({
       amount: Number(formValues.amount),
       category: formValues.category,
@@ -48,9 +50,9 @@ const CashflowCreator = () => {
     // setNewCashflow(false)
   }
 
-  const CustomInputComponent = (props:{name: string, placeholder?: string}) => (
-    <input className="form__input" type="text" {...props} />
-  )
+  // const CustomInputComponent = (props:{name: string, placeholder?: string}) => (
+  //   <input className="form__input" type="text" {...props} />
+  // )
   return (
     <CashflowCreatorStyle>
       <>
@@ -60,36 +62,42 @@ const CashflowCreator = () => {
       </button>
       }
       {newCashflow &&
-          <Formik
-          initialValues={CreateCashflowInit}
-          validationSchema={CreateCashflowValidator}
-          onSubmit={(values, action) => onSubmitNewCashflow(values, action)}
-        >
-          <Form className='form__body'
-          >
-            <Field label='amount' name='amount' placeholder="Amount" as={CustomInputComponent}/>
-            <div className='error'>
-              <ErrorMessage className='error__msg' name="amount" component="p" />
-            </div>
-            <Field label='category' name='category' placeholder="Category" as={CustomInputComponent}/>
-            <div className='error'>
-              <ErrorMessage className='error__msg' name="category" component="p" />
-            </div>
-            <Field label='details' name='details' placeholder="Details" as={CustomInputComponent}/>
-            <div className='error'>
-              <ErrorMessage className='error__msg' name="details" component="p" />
-            </div>
-            <Field className='form__select' name="isExpense" id="isExpense" as="select">
-              <option hidden value="type">Type</option>
-              <option value="expense">Expense</option>
-              <option value="income">Income</option>
-            </Field>
-            <div className='error'>
-              <ErrorMessage className='error__msg' name="isExpense" component="p" />
-            </div>
-            <button className='form__submit-btn' type='submit'>Create</button>
-          </Form>
-        </Formik>
+        <CashflowForm<CreateCashflowForm>
+          init={CreateCashflowInit}
+          validator={CreateCashflowValidator}
+          submitDispatch={(formValues, action) => onSubmitNewCashflow(formValues, action)}
+          btnText="Create"
+        />
+        //   <Formik
+        //   initialValues={CreateCashflowInit}
+        //   validationSchema={CreateCashflowValidator}
+        //   onSubmit={(values, action) => onSubmitNewCashflow(values, action)}
+        // >
+        //   <Form className='form__body'
+        //   >
+        //     <Field label='amount' name='amount' placeholder="Amount" as={CustomInputComponent}/>
+        //     <div className='error'>
+        //       <ErrorMessage className='error__msg' name="amount" component="p" />
+        //     </div>
+        //     <Field label='category' name='category' placeholder="Category" as={CustomInputComponent}/>
+        //     <div className='error'>
+        //       <ErrorMessage className='error__msg' name="category" component="p" />
+        //     </div>
+        //     <Field label='details' name='details' placeholder="Details" as={CustomInputComponent}/>
+        //     <div className='error'>
+        //       <ErrorMessage className='error__msg' name="details" component="p" />
+        //     </div>
+        //     <Field className='form__select' name="isExpense" id="isExpense" as="select">
+        //       <option hidden value="type">Type</option>
+        //       <option value="expense">Expense</option>
+        //       <option value="income">Income</option>
+        //     </Field>
+        //     <div className='error'>
+        //       <ErrorMessage className='error__msg' name="isExpense" component="p" />
+        //     </div>
+        //     <button className='form__submit-btn' type='submit'>Create</button>
+        //   </Form>
+        // </Formik>
         }
       {!isLoading && error &&
       <p className='errMsg'>

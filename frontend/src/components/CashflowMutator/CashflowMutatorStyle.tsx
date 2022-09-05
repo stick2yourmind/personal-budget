@@ -39,6 +39,15 @@ const CashflowMutatorStyle = styled.li`
     color: #b9383e;
     text-align: center;
   }
+  .record__mutation{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem 0;
+  }
+  .record__edit-img,.record__remove-img{
+    max-width: 5rem;
+  }
 `
 
 export default CashflowMutatorStyle

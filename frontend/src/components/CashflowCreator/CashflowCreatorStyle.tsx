@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const CashflowCreatorStyle = styled.div`
-  height: 25rem;
+  min-height: 25rem;
   width: 100%;
   display: flex;
   flex-direction: column;

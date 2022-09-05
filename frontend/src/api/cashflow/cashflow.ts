@@ -10,6 +10,11 @@ export interface CreateParams{
   controllerSignal?: AbortController['signal']
   dataReq: DataCreateCashflowRequest
 }
+export interface DeleteParams{
+  accessToken?: string
+  controllerSignal?: AbortController['signal']
+  id: number
+}
 
 export const getBalance = async ({ controllerSignal, accessToken }:BalanceParams) => {
   const balanceEndpoint = import.meta.env.VITE_API_CASHFLOW_BALANCE
@@ -50,6 +55,20 @@ export const postCreateCashflow = async ({ controllerSignal, accessToken, dataRe
     method: 'post',
     signal: controllerSignal,
     url: balanceEndpoint
+  })
+  return res.data
+}
+
+export const deleteCashflowById = async ({ controllerSignal, accessToken, id }:DeleteParams) => {
+  const balanceEndpoint = import.meta.env.VITE_API_CASHFLOW_CREATE
+  const res = await api({
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      authorization: `Bearer ${accessToken}`
+    },
+    method: 'delete',
+    signal: controllerSignal,
+    url: balanceEndpoint + id
   })
   return res.data
 }

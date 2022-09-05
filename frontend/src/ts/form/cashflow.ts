@@ -1,5 +1,5 @@
 export interface CreateCashflowForm{
-  amount: string
+  amount: number
   category: string
   details: string
   isExpense: string
