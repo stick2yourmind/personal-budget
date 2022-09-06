@@ -39,7 +39,6 @@ const CashflowCreator = () => {
   }, [])
 
   const onSubmitNewCashflow = (formValues:CreateCashflowForm, action:FormikHelpers<CreateCashflowForm>) => {
-    console.log('validado')
     createCashflowRequest({
       amount: Number(formValues.amount),
       category: formValues.category,

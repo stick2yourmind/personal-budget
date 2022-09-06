@@ -18,6 +18,7 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [controller, setController] = useState<AbortController>()
   const [deleteController, setDeleteController] = useState<AbortController>()
+  const [deleteInProgress, setDeleteInProgress] = useState<boolean>(false)
   const accessToken = useSelector((state:RootState) => state.user.accessToken)
   const queryClient = useQueryClient()
   const {
@@ -38,7 +39,7 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
   })
   const {
     mutate: deleteCashflowRequest,
-    isSuccess: deleting
+    isIdle: deleting
   } = useMutation<DataDeleteCashflowResponse, unknown, void>(() => {
     return deleteCashflowById({
       accessToken,
@@ -59,8 +60,8 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
     setDeleteController(deleteCtlr)
 
     return () => {
-      controller && controller.abort()
-      deleteController && deleteController.abort()
+      controller?.signal && controller.abort()
+      deleteController?.signal && deleteController.abort()
     }
   }, [])
   useEffect(() => {
@@ -74,9 +75,7 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
       details: formValues.details
     })
     action.resetForm()
-    // setNewCashflow(false)
   }
-
   return (
     <CashflowMutatorStyle>
       {!isEdit &&
@@ -88,7 +87,11 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
         <div className="record__mutation">
           <img className='record__edit-img' src={edit} alt="edit record" onClick={() => setIsEdit(true)}/>
           <img className='record__remove-img' src={remove} alt="remove record"
-          onClick={() => !deleting && deleteCashflowRequest()}/>
+          onClick={() => {
+            if (!deleteInProgress)
+              deleteCashflowRequest()
+            setDeleteInProgress(true)
+          }}/>
         </div>
       </>
       }
