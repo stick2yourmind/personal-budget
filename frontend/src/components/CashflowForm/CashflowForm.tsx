@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
-import { ErrorMessage, Field, Form, Formik, FormikConfig, FormikValues } from 'formik'
+import { ErrorMessage, Field, Form, Formik, FormikConfig } from 'formik'
 
-export interface CashflowFormProps<K=FormikValues>{
+export interface CashflowFormProps<K=unknown>{
   btnText: string
   cashflow?:K
   init: K
@@ -9,7 +9,7 @@ export interface CashflowFormProps<K=FormikValues>{
   validator: Yup.SchemaOf<K>
 }
 
-function CashflowForm<K=FormikValues> ({ submitDispatch, validator, init, btnText, cashflow }:CashflowFormProps<K>) {
+function CashflowForm<K> ({ submitDispatch, validator, init, btnText, cashflow }:CashflowFormProps<K>) {
   const CustomInputComponent = (props:{name: string, placeholder?: string}) => (
     <input className="form__input" type="text" {...props} />
   )
