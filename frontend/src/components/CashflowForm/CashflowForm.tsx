@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
-import { ErrorMessage, Field, Form, Formik, FormikConfig } from 'formik'
+import { ErrorMessage, Field, Form, Formik, FormikConfig, FormikValues } from 'formik'
 
-export interface CashflowFormProps<K=unknown>{
+export interface CashflowFormProps<K>{
   btnText: string
   cashflow?:K
   init: K
@@ -15,7 +15,7 @@ function CashflowForm<K> ({ submitDispatch, validator, init, btnText, cashflow }
   )
 
   return (
-    <Formik<K>
+    <Formik<FormikValues & K>
     initialValues={cashflow || { ...init, amount: '' }}
     validationSchema={validator}
     onSubmit={(values, action) => submitDispatch(values, action) }
