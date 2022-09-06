@@ -38,8 +38,7 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
     }
   })
   const {
-    mutate: deleteCashflowRequest,
-    isIdle: deleting
+    mutate: deleteCashflowRequest
   } = useMutation<DataDeleteCashflowResponse, unknown, void>(() => {
     return deleteCashflowById({
       accessToken,
@@ -79,7 +78,7 @@ const CashflowMutator:React.FC<CashflowMutatorProps> = ({ cashflow }) => {
   return (
     <CashflowMutatorStyle>
       {!isEdit &&
-      <>{cashflow.id}
+      <>
         <p className='record__amount'>amount: {cashflow.amount}</p>
         <p className='record__category'>category: {cashflow.category}</p>
         <p className='record__details'>details: {cashflow.details}</p>
