@@ -55,6 +55,7 @@ const CashflowCreator = () => {
   return (
     <CashflowCreatorStyle>
       <>
+      <h1 className='add__title'>Create new cashflow</h1>
       {!newCashflow &&
       <button className='add__btn'>
         <img className='add__img' src={add} alt="add cashflow" onClick={() => setNewCashflow(true)}/>

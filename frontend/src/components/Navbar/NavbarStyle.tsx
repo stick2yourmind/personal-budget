@@ -151,8 +151,11 @@ const NavbarStyle = styled.div`
     height: auto;
   }
   .nav__menu{
-    height: auto;
     display: block;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .nav__list{
     flex-direction: row;

@@ -7,6 +7,9 @@ const CashflowCreatorStyle = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  .add__title{
+    padding: 2rem;
+  }
   .add__btn{
     height: 100%;
     background: transparent;
@@ -42,6 +45,22 @@ const CashflowCreatorStyle = styled.div`
     padding: 0.5rem;
     border-radius: 0.4rem;
     font-weight: 600;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .form__body{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 30rem;
+    }
+    .form__input{
+      padding: 1rem;
+      font-size: 2rem;
+      margin: 0.5rem;
+      width: 30rem;
+    }
   }
 `
 export default CashflowCreatorStyle
