@@ -5,8 +5,9 @@ import { motion, Transition, Variants } from 'framer-motion'
 /*                              ACCORDION'S STYLE                             */
 /* -------------------------------------------------------------------------- */
 
-export const AccordionStyle = styled.div`
+export const AccordionStyle = styled(motion.div)`
   width: 100%;
+  margin-bottom: 1rem;
 `
 
 /* -------------------------------------------------------------------------- */

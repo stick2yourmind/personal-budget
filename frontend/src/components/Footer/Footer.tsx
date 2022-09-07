@@ -3,7 +3,7 @@ import FooterStyle from './FooterStyle'
 const Footer = () => {
   return (
     <FooterStyle>
-      Footer
+      No, we don&apos;t have copyright :)
     </FooterStyle>
   )
 }

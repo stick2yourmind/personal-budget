@@ -48,6 +48,36 @@ const CashflowMutatorStyle = styled.li`
   .record__edit-img,.record__remove-img{
     max-width: 5rem;
   }
+  .form__body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+  .form__input{
+    padding: 1rem;
+    font-size: 2rem;
+    margin: 0.5rem;
+    width: 100%;
+  }
+  .form__select{
+    text-align: center;
+    text-align-last: center;
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  .form__submit-btn{
+    width: 100%;
+    background-color: #ff7b1a;
+    margin: 1rem 0;
+    color: whitesmoke;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    font-weight: 600;
+  }
 `
 
 export default CashflowMutatorStyle
