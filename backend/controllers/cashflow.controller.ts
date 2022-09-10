@@ -6,6 +6,7 @@ import {
   deleteCashflowService, updateCashflowService,
   getBalanceCashflowService, getCashflowService
 } from '../services/cashflow/cashflow.services'
+import { CashflowType } from '../ts/def'
 
 export const createCashflowCtrlr = async (req:Request, res:Response, next:NextFunction) => {
   try {
@@ -32,9 +33,16 @@ export const getCashflowCtrlr = async (req:Request, res:Response, next:NextFunct
     console.log('🚀 ~ file: cashflow.controller.ts ~ line 32 ~ getCashflowCtrlr ~ page', page)
     const limit = Number.isNaN(Number(req.query?.limit)) ? 10 : Number(req.query?.limit)
     console.log('🚀 ~ file: cashflow.controller.ts ~ line 33 ~ getCashflowCtrlr ~ limit', limit)
+    const queryType = req.query?.type?.toString()
+    console.log('🚀 ~ file: cashflow.controller.ts ~ line 37 ~ getCashflowCtrlr ~ queryType', queryType)
+    const cashflowType = queryType &&
+    ((queryType === CashflowType.expense) || (queryType === CashflowType.income))
+      ? CashflowType[queryType]
+      : undefined
+    console.log('🚀 ~ file: cashflow.controller.ts ~ line 39 ~ getCashflowCtrlr ~ cashflowType', cashflowType)
     const authHeader = req.headers.authorization
     const accessToken = authHeader?.split(' ')[1] ?? ''
-    const getCashflowMsg = await getCashflowService({ accessToken, limit, page })
+    const getCashflowMsg = await getCashflowService({ accessToken, cashflowType, limit, page })
     const response = apiSuccessResponse(getCashflowMsg, STATUS.OK)
     return res.status(STATUS.OK).json(response)
   } catch (error) {

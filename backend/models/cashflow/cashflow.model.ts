@@ -42,32 +42,58 @@ export const createCashflowModel = async (payload:CreateCashflow) => {
   }
 }
 
-export const getCashflowModel = async ({ page, limit, userId }:GetCashflow) => {
+export const getCashflowModel = async ({ page, limit, userId, cashflowType }:GetCashflow) => {
   try {
     if (prisma) {
-      const count = await prisma.cashflow.count({
-        where: {
-          // eslint-disable-next-line object-shorthand
-          userId: userId
-        }
-      })
+      let count = 0
+      let cashflow: CashflowRelated = []
+      if (!cashflowType)
+        count = await prisma.cashflow.count({
+          where: {
+            // eslint-disable-next-line object-shorthand
+            userId: userId
+          }
+        })
+      else
+        count = await prisma.cashflow.count({
+          where: {
+            AND: [{ userId: { equals: userId } }, { isExpense: { equals: (cashflowType === 'expense') } }]
+          }
+        })
       console.log('🚀 ~ file: cashflow.model.ts ~ line 49 ~ getCashflowModel ~ count', count)
       const maxPage = Math.ceil((count / 10)) - 1
-      const cashflow:CashflowRelated = await prisma.cashflow.findMany({
-        select: {
-          amount: true,
-          category: true,
-          details: true,
-          id: true,
-          isExpense: true,
-          updatedAt: true
-        },
-        skip: 10 * page,
-        take: limit,
-        where: {
-          userId: { equals: userId }
-        }
-      })
+      if (!cashflowType)
+        cashflow = await prisma.cashflow.findMany({
+          select: {
+            amount: true,
+            category: true,
+            details: true,
+            id: true,
+            isExpense: true,
+            updatedAt: true
+          },
+          skip: 10 * page,
+          take: limit,
+          where: {
+            userId: { equals: userId }
+          }
+        })
+      else
+        cashflow = await prisma.cashflow.findMany({
+          select: {
+            amount: true,
+            category: true,
+            details: true,
+            id: true,
+            isExpense: true,
+            updatedAt: true
+          },
+          skip: 10 * page,
+          take: limit,
+          where: {
+            AND: [{ userId: { equals: userId } }, { isExpense: { equals: (cashflowType === 'expense') } }]
+          }
+        })
       console.log('🚀 ~ file: cashflow.model.ts ~ line 56 ~ getCashflowModel ~ Cashflow', cashflow)
       return { cashflow, maxPage }
     } else

@@ -1,4 +1,5 @@
 import { User, Cashflow } from '@prisma/client'
+import { CashflowType } from './controllers'
 /* -------------------------------------------------------------------------- */
 /*                                MODEL'S TYPES                               */
 /* -------------------------------------------------------------------------- */
@@ -46,6 +47,7 @@ export interface CreateCashflow{
   userId?: UserIdType
 }
 export interface GetCashflow {
+  cashflowType?: CashflowType
   limit: number
   page: number
   userId: UserIdType

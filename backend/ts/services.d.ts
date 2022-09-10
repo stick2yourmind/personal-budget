@@ -1,6 +1,6 @@
 import { AccessTokenType, RefreshTokenType } from './models.d'
 import { Cashflow } from '@prisma/client'
-import { UserDataResponse, CashflowDataResponse, OffsetType } from '../ts/controllers'
+import { UserDataResponse, CashflowDataResponse, OffsetType, CashflowType } from '../ts/controllers'
 import { CreateUser, GetUser, PasswordType, CreateCashflow } from '../ts/models'
 
 /* -------------------------------------------------------------------------- */
@@ -33,6 +33,7 @@ export interface GetCashflowByIdReq extends Pick<Cashflow, 'id' >{
 }
 export interface GetCashflowReq {
   accessToken: string
+  cashflowType?: CashflowType
   limit: string | number
   page: string | number
 }

@@ -2,6 +2,7 @@ import { AccessTokenType, RefreshTokenType, UserIdType } from './models.d'
 import { User } from '@prisma/client'
 import { EmailType, NameType, CreateCashflow } from './models'
 import { ParsedQs } from 'qs'
+
 /* -------------------------------------------------------------------------- */
 /*                              CONTROLLER'S TYPE                             */
 /* -------------------------------------------------------------------------- */

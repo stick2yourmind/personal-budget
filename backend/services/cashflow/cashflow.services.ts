@@ -60,6 +60,7 @@ export const getCashflowService:GetCashflowService = async (payload) => {
     const user = accessTokenVerifier({ accessToken })
     await getCashflowValidator.validate({ limit, page }, { abortEarly: false })
     const { cashflow, maxPage } = await getCashflowModel({
+      cashflowType: payload.cashflowType,
       limit,
       page,
       userId: user.id
