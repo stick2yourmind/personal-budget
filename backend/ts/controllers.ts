@@ -1,6 +1,5 @@
-import { AccessTokenType, RefreshTokenType, UserIdType } from './models.d'
+import { AccessTokenType, RefreshTokenType, UserIdType, EmailType, NameType, CreateCashflow } from './models'
 import { User } from '@prisma/client'
-import { EmailType, NameType, CreateCashflow } from './models'
 import { ParsedQs } from 'qs'
 
 /* -------------------------------------------------------------------------- */
@@ -26,3 +25,8 @@ export interface CashflowDataResponseRelated extends CashflowDataResponse{
   user: User
 }
 export type OffsetType = string | ParsedQs | string[] | ParsedQs[] | undefined
+
+export enum CashflowType{
+  expense = 'expense',
+  income = 'income'
+}

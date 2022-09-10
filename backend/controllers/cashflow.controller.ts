@@ -6,7 +6,7 @@ import {
   deleteCashflowService, updateCashflowService,
   getBalanceCashflowService, getCashflowService
 } from '../services/cashflow/cashflow.services'
-import { CashflowType } from '../ts/def'
+import { CashflowType } from '../ts/controllers'
 
 export const createCashflowCtrlr = async (req:Request, res:Response, next:NextFunction) => {
   try {
