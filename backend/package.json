@@ -12,7 +12,7 @@
     "back-build": "npm install typescript && npx tsc --build",
     "back-run-build": "node ./dist/index.js",
     "back-prisma-generate": "npx prisma generate",
-    "back-install": "npm install"
+    "back-install": "npm install && npx prisma migrate dev --name init && npx prisma generate"
   },
   "engines": {
     "node": ">16.0"
@@ -55,7 +55,8 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "2.1.0",
     "prisma": "^4.2.1",
-    "ts-node-dev": "2.0.0"
+    "ts-node-dev": "2.0.0",
+    "typescript": "^4.9.4"
   },
   "repository": {
     "type": "git",
