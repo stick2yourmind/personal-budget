@@ -12,7 +12,7 @@
     "back-build": "npm install typescript && npx tsc --build",
     "back-run-build": "node ./dist/index.js",
     "back-prisma-generate": "npx prisma generate",
-    "back-install": "npm install && npx prisma migrate dev --name init && npx prisma generate"
+    "back-install-build": "npm install && npx prisma migrate dev --name init && npx prisma generate && npx tsc --build"
   },
   "engines": {
     "node": ">16.0"
